@@ -4,5 +4,6 @@
   "templater-obsidian",
   "omnisearch",
   "quickadd",
-  "dataview"
+  "dataview",
+  "obsidian-git"
 ]

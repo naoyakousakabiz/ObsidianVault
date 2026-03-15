@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "30_Input/Kindle/「余命３ヵ月」と伝えるときの医者のホンネ.md",
+                "file": "40_Knowledge/!Dashboard.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "「余命３ヵ月」と伝えるときの医者のホンネ"
+              "title": "!Dashboard"
             }
           }
         ]
@@ -182,6 +182,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-git:Open Git source control": false,
       "bases:新規ベースを作成": false,
       "switcher:クイックスイッチャーを開く": false,
       "graph:グラフビューを開く": false,
@@ -194,8 +195,14 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "5f374f220b079427",
+  "active": "eb7620626c3c3ebd",
   "lastOpenFiles": [
+    "30_Input/!Dashboard.md",
+    "30_Input/Kindle/ＡＩが同僚.md",
+    "40_Knowledge/!Dashboard.md",
+    "20_Projects/!Dashboard.md",
+    "30_Input/Kindle/「余命３ヵ月」と伝えるときの医者のホンネ.md",
+    "名称未設定フォルダ",
     "30_Input/Kindle/「持ち家」という病 不動産と日本人・「これまで」と「これから」の経済学.md",
     "無題のファイル.canvas",
     "30_Input/Kindle/政治のことよくわからないまま社会人になってしまった人へ―増補改訂版.md",
@@ -218,11 +225,6 @@
     "30_Input/Kindle/君はどこにでも行ける.md",
     "30_Input/Kindle/小室友里先生が「３回のデートでベッドインするテクニック」を手取り足取り教えてくれるようです。.md",
     "30_Input/Kindle/99％の女性に好かれる大人のモテルール44.md",
-    "30_Input/Kindle/ピクサー流　創造するちから.md",
-    "30_Input/Kindle/新卒採用基準―面接官はここを見ている.md",
-    "30_Input/Kindle/加藤鷹のSEX人間学.md",
-    "30_Input/Kindle/君がオヤジになる前に.md",
-    "30_Input/Kindle/拝金 青春経済小説.md",
     "60_Work/03_自事業",
     "96_Healthcare/運動",
     "60_Work/03_事業",
@@ -232,7 +234,6 @@
     "60_Work/事業",
     "60_Work/副業",
     "60_Work/本業",
-    "60_Work/キャリア戦略",
     "10_Knowledge/assets/cursor-infographic.png",
     "00_Inbox/line_oa_chat_260201_082716.jpg"
   ]
