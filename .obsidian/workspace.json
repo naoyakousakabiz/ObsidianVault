@@ -1,0 +1,239 @@
+{
+  "main": {
+    "id": "20da26fb15e2745d",
+    "type": "split",
+    "children": [
+      {
+        "id": "e9846c2ad35544e5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5f374f220b079427",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "30_Input/Kindle/「余命３ヵ月」と伝えるときの医者のホンネ.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "「余命３ヵ月」と伝えるときの医者のホンネ"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "18a2e2be8f7f43a4",
+    "type": "split",
+    "children": [
+      {
+        "id": "11ea216ced0aaff9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "eb7620626c3c3ebd",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "ファイルエクスプローラ"
+            }
+          },
+          {
+            "id": "b5f2be2a4e60802e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "46a3e4f9c7c5230f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "223d9658abc3ca30",
+    "type": "split",
+    "children": [
+      {
+        "id": "9629bdfd4f92255c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2d3daf89aa77269e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "dfdb0944e9b80b1d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "21788d1aedcf9a25",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "00a1ea78ba20ce92",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "568b7aa798052390",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "00_Inbox/デスクトップ接続テスト.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of デスクトップ接続テスト"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:新規ベースを作成": false,
+      "switcher:クイックスイッチャーを開く": false,
+      "graph:グラフビューを開く": false,
+      "canvas:新規キャンバスを作成": false,
+      "daily-notes:今日のデイリーノートを開く": false,
+      "templates:テンプレートを挿入": false,
+      "command-palette:コマンドパレットを開く": false,
+      "obsidian-kindle-plugin:Sync your Kindle highlights": false,
+      "templater-obsidian:Templater": false,
+      "omnisearch:Omnisearch": false
+    }
+  },
+  "active": "5f374f220b079427",
+  "lastOpenFiles": [
+    "30_Input/Kindle/「持ち家」という病 不動産と日本人・「これまで」と「これから」の経済学.md",
+    "無題のファイル.canvas",
+    "30_Input/Kindle/政治のことよくわからないまま社会人になってしまった人へ―増補改訂版.md",
+    "30_Input/Kindle/なぜ、この人と話をすると楽になるのか.md",
+    "30_Input/Kindle/セキュリティ技術 入門編.md",
+    "30_Input/Kindle/戦国名言.md",
+    "30_Input/Kindle/嫌われる勇気.md",
+    "30_Input/Kindle/星の王子さま.md",
+    "30_Input/Kindle/おとなの教養　私たちはどこから来て、どこへ行くのか？.md",
+    "30_Input/Kindle/世界を変えた10冊の本.md",
+    "30_Input/Kindle/伝説の新人　20代でチャンスをつかみ突き抜ける人の10の違い.md",
+    "30_Input/Kindle/なぜ一流の人はみな「眠り」にこだわるのか？.md",
+    "30_Input/Kindle/この社会で戦う君に「知の世界地図」をあげよう　池上彰教授の東工大講義.md",
+    "30_Input/Kindle/飲みの席には這ってでも行け！ 人づき合いが苦手な人のための「コミュ力」の身につけ方.md",
+    "30_Input/Kindle/領土の常識.md",
+    "30_Input/Kindle/世界で活躍する脳科学者が教える! 世界で通用する人がいつもやっていること.md",
+    "30_Input/Kindle/悪の出世学　ヒトラー、スターリン、毛沢東.md",
+    "30_Input/Kindle/この日本で生きる君が知っておくべき「戦後史の学び方」　池上彰教授の東工大講義　日本篇.md",
+    "30_Input/Kindle/コーチングのプロが教える　「ほめる」技術.md",
+    "30_Input/Kindle/君はどこにでも行ける.md",
+    "30_Input/Kindle/小室友里先生が「３回のデートでベッドインするテクニック」を手取り足取り教えてくれるようです。.md",
+    "30_Input/Kindle/99％の女性に好かれる大人のモテルール44.md",
+    "30_Input/Kindle/ピクサー流　創造するちから.md",
+    "30_Input/Kindle/新卒採用基準―面接官はここを見ている.md",
+    "30_Input/Kindle/加藤鷹のSEX人間学.md",
+    "30_Input/Kindle/君がオヤジになる前に.md",
+    "30_Input/Kindle/拝金 青春経済小説.md",
+    "60_Work/03_自事業",
+    "96_Healthcare/運動",
+    "60_Work/03_事業",
+    "60_Work/02_副業",
+    "60_Work/01_本業",
+    "60_Work/00_キャリア戦略",
+    "60_Work/事業",
+    "60_Work/副業",
+    "60_Work/本業",
+    "60_Work/キャリア戦略",
+    "10_Knowledge/assets/cursor-infographic.png",
+    "00_Inbox/line_oa_chat_260201_082716.jpg"
+  ]
+}
