@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "40_Knowledge/!Dashboard.md",
+                "file": "40_Knowledge/AI/スライド作成_Notebooklm.md.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "!Dashboard"
+              "title": "スライド作成_Notebooklm.md"
             }
           }
         ]
@@ -195,8 +195,11 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "5f374f220b079427",
+  "active": "eb7620626c3c3ebd",
   "lastOpenFiles": [
+    "40_Knowledge/AI/NotebookLM活用.md",
+    "40_Knowledge/!Dashboard.md",
+    "40_Knowledge/AI/スライド作成_Notebooklm.md.md",
     "40_Knowledge/Business/AI×読書.md",
     "50_Journaling/rule_Journaling.md",
     "50_Journaling",
@@ -204,7 +207,6 @@
     "40_Knowledge/Business/AI×読書",
     "30_Input/!Dashboard.md",
     "30_Input/Kindle/ＡＩが同僚.md",
-    "40_Knowledge/!Dashboard.md",
     "20_Projects/!Dashboard.md",
     "30_Input/Kindle/「余命３ヵ月」と伝えるときの医者のホンネ.md",
     "名称未設定フォルダ",
@@ -226,8 +228,6 @@
     "30_Input/Kindle/世界で活躍する脳科学者が教える! 世界で通用する人がいつもやっていること.md",
     "30_Input/Kindle/悪の出世学　ヒトラー、スターリン、毛沢東.md",
     "30_Input/Kindle/この日本で生きる君が知っておくべき「戦後史の学び方」　池上彰教授の東工大講義　日本篇.md",
-    "30_Input/Kindle/コーチングのプロが教える　「ほめる」技術.md",
-    "30_Input/Kindle/君はどこにでも行ける.md",
     "60_Work/03_自事業",
     "96_Healthcare/運動",
     "60_Work/03_事業",
