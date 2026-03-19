@@ -27,12 +27,22 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_Inbox/sync_test.md",
+                "file": "40_Knowledge/AI/AI活用方針.md",
                 "mode": "source",
-                "source": false
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
-              "title": "sync_test"
+              "title": "AI活用方針"
             }
           }
         ],
@@ -177,7 +187,10 @@
       "daily-notes:今日のデイリーノートを開く": false,
       "templates:テンプレートを挿入": false,
       "command-palette:コマンドパレットを開く": false,
-      "bases:新規ベースを作成": false
+      "bases:新規ベースを作成": false,
+      "templater-obsidian:Templater": false,
+      "omnisearch:Omnisearch": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "4d7bdb515a23977d",
