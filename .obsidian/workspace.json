@@ -11,12 +11,24 @@
             "id": "449c6cd2212df53b",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.12.7"
+                "file": "08_Relationship/テストテスト.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
-              "icon": "lucide-book-up",
-              "title": "リリースノート 1.12.7"
+              "icon": "lucide-file",
+              "title": "テストテスト"
             }
           }
         ]
@@ -92,6 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "08_Relationship/テストテスト.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -101,7 +114,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "バックリンク"
+              "title": "テストテストへのバックリンク"
             }
           },
           {
@@ -184,6 +197,7 @@
   },
   "active": "449c6cd2212df53b",
   "lastOpenFiles": [
+    "08_Relationship/テストテスト.md",
     "11_AI/01_tools-ops/NotebookLM_スライド作成セミナー.md",
     "11_AI/01_tools-ops/Notebook LM セミナー前半.md",
     "07_AI/01_tools-ops/Notebook LM セミナー前半.md",
@@ -219,7 +233,6 @@
     "11_AI/99_archive/Cursor_NotebookLM_運用統合レポート.md",
     "11_AI/03_methods/スライド作成_NotebookLM.md",
     "11_AI/99_archive/AI活用方針.md",
-    "11_AI/99_archive/AI戦略_統合版.md",
     "無題のファイル.canvas",
     "10_Knowledge/assets/cursor-infographic.png",
     "00_Inbox/line_oa_chat_260201_082716.jpg"
