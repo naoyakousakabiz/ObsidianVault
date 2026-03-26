@@ -18,4 +18,4 @@
 *.tmp\
 \
 # system\
-.Trashes}
+.Trashes}.DS_Store
