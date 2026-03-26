@@ -11,24 +11,10 @@
             "id": "449c6cd2212df53b",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "07_AI/業務.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "業務"
+              "title": "新規タブ"
             }
           }
         ]
@@ -104,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "07_AI/業務.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +99,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "業務へのバックリンク"
+              "title": "バックリンク"
             }
           },
           {
@@ -197,43 +182,43 @@
   },
   "active": "eb7620626c3c3ebd",
   "lastOpenFiles": [
-    "07_AI/明日実行計画_NotebookLM_to_ClaudeCode.md",
-    "07_AI/Cursor_NotebookLM_運用統合レポート.md",
-    "07_AI/AI戦略_統合版.md",
-    "07_AI/03_AI_Roadmap_Final.md",
-    "07_AI/02_AI_OS_Report_Final.md",
-    "07_AI/01_AI_Environment_Final.md",
-    "07_AI/00_MASTER.md",
-    "07_AI/ファクトチェック.md",
-    "07_AI/業務.md",
-    "40_Knowledge/!Dashboard.md",
-    "07_AI/AI読書術.md",
-    "07_AI/AI活用方針.md",
-    "20_Projects/!Dashboard.md",
-    "09_Daily",
-    "08_Clippings",
-    "06_Appearance",
-    "05_Athlete_Hub",
-    "04_Finance",
-    "03_Ringbell",
+    "11_AI/01_tools-ops/NotebookLM_スライド作成セミナー.md",
+    "11_AI/01_tools-ops/Notebook LM セミナー前半.md",
+    "07_AI/01_tools-ops/Notebook LM セミナー前半.md",
+    "Notebook LM セミナー前半.md",
+    "Notebook LM セミナー前半",
+    "07_Life/プロポーズ.md",
+    "07_Life/プロポーズ",
+    "07_AI/99_archive/AI戦略_統合版.md",
+    "07_AI/99_archive/業務.md",
+    "07_AI/99_archive/NotebookLM活用.md",
+    "07_AI/99_archive/Cursor_NotebookLM_運用統合レポート.md",
+    "07_AI/99_archive/AI活用方針.md",
+    "07_AI/99_archive/AI戦略_02_実績と対外説明.md",
+    "07_AI/01_tools-ops/AI活用整理.md",
+    "07_AI/01_tools-ops/03_NotebookLM運用.md",
+    "07_AI/01_tools-ops/02_AIキャッチアップ.md",
+    "07_AI/01_tools-ops/01_AI活用整理.md",
+    "07_AI/99_archive",
+    "07_AI/01_tools-ops",
     "07_AI",
-    "07_AI/オーケストレーションスキル.md",
-    "07_AI/スライド作成_Notebooklm.md.md",
-    "40_Knowledge/Business/AI活用×オーケストレーションスキル.md",
-    "40_Knowledge/Business/AI活用注意点_ファクトチェック.md",
-    "40_Knowledge/AI/AI活用方針 copy.md",
-    "07_AI/NotebookLM活用.md",
-    "40_Knowledge/Business/AI×読書.md",
-    "50_Journaling/rule_Journaling.md",
-    "50_Journaling",
-    "05_ジャーナリング",
-    "40_Knowledge/Business/AI×読書",
-    "30_Input/!Dashboard.md",
-    "30_Input/Kindle/ＡＩが同僚.md",
-    "30_Input/Kindle/「余命３ヵ月」と伝えるときの医者のホンネ.md",
-    "30_Input/Kindle/「持ち家」という病 不動産と日本人・「これまで」と「これから」の経済学.md",
+    "21_Kindle",
+    "10_Journal/rule_Journaling.md",
+    "10_Journal",
+    "09_Culture",
+    "08_Relationship",
+    "20_Clippings",
+    "11_AI/02_work-automation/03_RINGBELL/Ringwell_CS_業務分解_初版.md",
+    "11_AI/02_work-automation/03_RINGBELL/Ringwell_CS_AI自動化設計.md",
+    "11_AI/02_work-automation/03_RINGBELL/Ringwell_CS_業務分解_バックアップ.md",
+    "11_AI/99_archive/業務.md",
+    "11_AI/99_archive/NotebookLM活用.md",
+    "11_AI/03_methods/ファクトチェック.md",
+    "11_AI/99_archive/Cursor_NotebookLM_運用統合レポート.md",
+    "11_AI/03_methods/スライド作成_NotebookLM.md",
+    "11_AI/99_archive/AI活用方針.md",
+    "11_AI/99_archive/AI戦略_統合版.md",
     "無題のファイル.canvas",
-    "30_Input/Kindle/政治のことよくわからないまま社会人になってしまった人へ―増補改訂版.md",
     "10_Knowledge/assets/cursor-infographic.png",
     "00_Inbox/line_oa_chat_260201_082716.jpg"
   ]
