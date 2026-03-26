@@ -11,10 +11,12 @@
             "id": "449c6cd2212df53b",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新規タブ"
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.12.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "リリースノート 1.12.7"
             }
           }
         ]
@@ -180,7 +182,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "eb7620626c3c3ebd",
+  "active": "449c6cd2212df53b",
   "lastOpenFiles": [
     "11_AI/01_tools-ops/NotebookLM_スライド作成セミナー.md",
     "11_AI/01_tools-ops/Notebook LM セミナー前半.md",
