@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "08_Relationship/テストテスト.md",
+                "file": "20_Input/02_Clippings/趣味で始めるスポーツ・運動のススメ.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "テストテスト"
+              "title": "趣味で始めるスポーツ・運動のススメ"
             }
           }
         ]
@@ -88,7 +88,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 771.5
   },
   "right": {
     "id": "223d9658abc3ca30",
@@ -104,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "08_Relationship/テストテスト.md",
+                "file": "20_Input/02_Clippings/趣味で始めるスポーツ・運動のススメ.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +114,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "テストテストへのバックリンク"
+              "title": "趣味で始めるスポーツ・運動のススメへのバックリンク"
             }
           },
           {
@@ -197,42 +197,42 @@
   },
   "active": "eb7620626c3c3ebd",
   "lastOpenFiles": [
-    "11_AI/03_methods/定期実行_完全理解レポート.md",
-    "11_AI/03_methods/API_CLI_MCP_完全理解レポート.md",
-    "12_NotebookLM_Sync/05_Athlete/33_Serika_Relaxed_Crawl_Merged_Report.md",
-    "12_NotebookLM_Sync/05_Athlete/32_Run_Guide.md",
-    "12_NotebookLM_Sync/05_Athlete/31_Run_Guide.md",
-    "12_NotebookLM_Sync/05_Athlete/31_Bike_Guide.md",
-    "12_NotebookLM_Sync/05_Athlete/30_Swim_Guide.md",
-    "12_NotebookLM_Sync/05_Athlete/30_Swim.md",
-    "07_Life/引越し.md",
-    "引越し.md",
-    "07_Life/todo メモ.md",
-    "todo メモ.md",
-    "11_AI/01_tools-ops/NotebookLM_スライド作成セミナー_20260322.md",
-    "11_AI/01_tools-ops/Notebook LM 概要紹介セミナー_20260322.md",
-    "11_AI/01_tools-ops/NotebookLM×Gem.md",
-    "11_AI/01_tools-ops/NotebookLM×Gem_要点とツール比較.md",
-    "11_AI/02_work-automation/03_RINGBELL/NotebookLM×Gem_要点とツール比較.md",
-    "11_AI/02_work-automation/03_RINGBELL/NotebookLMxGem_記事全文_2026-03-25.md",
-    "11_AI/クロールテスト/ナレソメ辞典_要約_5-10行.md",
+    "99_System/01_NotebookLM_GAS_同期スクリプト.md",
+    "99_System/NotebookLM_Sync_Code.gs",
+    "20_Input/01_Kindle/伝わる文章が「速く」「思い通り」に書ける　87の法則.md",
+    "20_Input/02_Clippings/趣味で始めるスポーツ・運動のススメ.md",
+    "20_Input/01_Kindle/伝説の新人　20代でチャンスをつかみ突き抜ける人の10の違い.md",
+    "20_Input/01_Kindle/東大生が書いた　問題を解く力を鍛えるケース問題ノート―５０の厳選フレームワークで、どんな難問もスッキリ「地図化」！ 「東大生が書いたノート」シリーズ.md",
+    "20_Input/01_Kindle/藤原和博の必ず食える１％の人になる方法.md",
+    "20_Input/01_Kindle/独裁力.md",
+    "20_Input/01_Kindle/独習Python.md",
+    "20_Input/01_Kindle/読んだら忘れない読書術.md",
+    "20_Input/01_Kindle/変える技術、考える技術.md",
+    "20_Input/01_Kindle/本音で生きる　一秒も後悔しない強い生き方.md",
+    "20_Input/01_Kindle/凡人面接戦略.md",
+    "20_Input/01_Kindle/未来の年表　人口減少日本でこれから起きること.md",
+    "20_Input/01_Kindle/夢をかなえるゾウ１.md",
+    "20_Input/01_Kindle/怖い絵.md",
+    "20_Input/01_Kindle/半径５メートルの野望　完全版.md",
+    "20_Input/01_Kindle/領土の常識.md",
+    "20_Input/01_Kindle/ここらで広告コピーの本当の話をします。 宣伝会議.md",
+    "20_Input/01_Kindle/政治のことよくわからないまま社会人になってしまった人へ―増補改訂版.md",
+    "20_Input/01_Kindle/なぜ、この人と話をすると楽になるのか.md",
+    "20_Input/01_Kindle/セキュリティ技術 入門編.md",
+    "20_Input/01_Kindle/戦国名言.md",
+    "20_Input/01_Kindle/嫌われる勇気.md",
+    "20_Input/01_Kindle/星の王子さま.md",
+    "20_Input/01_Kindle/おとなの教養　私たちはどこから来て、どこへ行くのか？.md",
+    "20_Input/01_Kindle/世界を変えた10冊の本.md",
     "11_AI/クロールテスト",
-    "08_Relationship/テストテスト.md",
-    "11_AI/01_tools-ops/NotebookLM_スライド作成セミナー.md",
-    "11_AI/01_tools-ops/Notebook LM セミナー前半.md",
-    "07_AI/01_tools-ops/Notebook LM セミナー前半.md",
-    "Notebook LM セミナー前半.md",
     "Notebook LM セミナー前半",
-    "07_Life/プロポーズ.md",
     "07_Life/プロポーズ",
-    "07_AI/99_archive/AI戦略_統合版.md",
     "07_AI/99_archive",
     "07_AI/01_tools-ops",
     "07_AI",
     "21_Kindle",
     "10_Journal",
     "09_Culture",
-    "08_Relationship",
     "無題のファイル.canvas",
     "10_Knowledge/assets/cursor-infographic.png",
     "00_Inbox/line_oa_chat_260201_082716.jpg"

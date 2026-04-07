@@ -13,26 +13,25 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20260201.md",
+                "file": "00_Inbox/Todo.md",
                 "mode": "source",
-                "source": false
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
-              "title": "20260201"
-            }
-          },
-          {
-            "id": "4d7bdb515a23977d",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新規タブ"
+              "title": "Todo"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -179,8 +178,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4d7bdb515a23977d",
+  "active": "2b85a0f51cb23d36",
   "lastOpenFiles": [
+    "00_Inbox/Todo (conflict 2026-04-08-00-08-33).md",
+    "00_Inbox/Todo.md",
+    "20_Input/02_Clippings/趣味で始めるスポーツ・運動のススメ.md",
+    "20_Input/02_Clippings/初心者のためのトライアスロントレーニング計画法　～完走を目指して～.md",
     "00_Inbox/てすと.md",
     "00_Inbox/sync_test.md",
     "10_Knowledge",

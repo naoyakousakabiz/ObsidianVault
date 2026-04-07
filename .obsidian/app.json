@@ -1,6 +1,8 @@
 {
   "promptDelete": false,
-  "readableLineLength": false,
+  "readableLineLength": true,
   "showLineNumber": true,
-  "newFileLocation": "current"
+  "newFileLocation": "current",
+  "strictLineBreaks": false,
+  "tabSize": 5
 }
