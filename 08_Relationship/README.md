@@ -1,3 +1,12 @@
+---
+date: 2026-04-08
+type: index
+domain: life
+status: active
+source: human
+tags: []
+---
+
 # 08_Relationship
 
 **パートナー・家族・友人など人間関係**全般（子ども**専用**の記録は [[06_Child/README|06_Child]]）。

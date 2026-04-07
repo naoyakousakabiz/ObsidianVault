@@ -1,3 +1,12 @@
+---
+date: 2026-04-08
+type: index
+domain: life
+status: active
+source: human
+tags: []
+---
+
 # Agreements
 
 **継続的なテーマ**と**決まり事**（合意・ルール・方針）をストックする。〆切のあるカレンダー用事は `20_events` に置く。

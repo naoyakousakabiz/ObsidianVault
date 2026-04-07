@@ -1,4 +1,13 @@
-# 03_Business — 個人事業
+---
+date: 2026-04-08
+type: index
+domain: business
+status: active
+source: human
+tags: []
+---
+
+# 02_Business — 個人事業
 
 ## 役割
 AIコンサル・AI活用支援を軸とした個人事業の戦略管理と、副業RINGBELLの実務ナレッジ蓄積。
@@ -33,4 +42,4 @@ NotebookLM「03 RINGBELL」ノートブックとセットで運用。
 ## 書き方の原則
 - 戦略メモは根拠（数字・市場情報・判断軸）を必ず添える
 - 顧客情報は匿名化してから記録する
-- AI自動化の設計は `04_AI/02_automation/` に置き、成果物をここに着地させる
+- 自動化の実装は `RINGBELL/50_AI自動化/` に置く。AI戦略の正本は `04_AI/` を参照

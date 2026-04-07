@@ -3,9 +3,9 @@
   "hasMigratedDailyNoteSettings": true,
   "hasMigratedWeeklyNoteSettings": false,
   "daily": {
-    "folder": "99_System/Daily",
-    "template": "99_System/Templates/daily_template.md",
-    "enabled": false
+    "folder": "80_Journal/01_Daily",
+    "template": "99_System/Templates/Daily.md",
+    "enabled": true
   },
   "weekly": {
     "format": "",

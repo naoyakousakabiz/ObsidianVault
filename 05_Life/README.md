@@ -1,3 +1,12 @@
+---
+date: 2026-04-08
+type: index
+domain: life
+status: active
+source: human
+tags: []
+---
+
 # 05_Life
 
 **二人の共同生活の運用ハブ**（期限・家計・合意・健康管理）。キャリアや仕事の意思決定は `03_Career` / `01_Work`。ここは **Life** の語感どおり「人生全体」ではなく、**世帯として回すオペ**に寄せた置き場。

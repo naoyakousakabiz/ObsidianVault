@@ -1,3 +1,12 @@
+---
+date: 2026-04-08
+type: index
+domain: life
+status: active
+source: human
+tags: []
+---
+
 # 二人会議
 
 ふたり会議で出た**プロフィール・価値観・思考**の**資産化**用（生ログ400問などの**全文**はNotebookLM等と役割分担推奨）。

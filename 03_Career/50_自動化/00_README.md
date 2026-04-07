@@ -1,6 +1,18 @@
+---
+date: 2026-04-08
+type: index
+domain: career
+status: active
+source: human
+tags: []
+---
+
 # 50_自動化 — 自動化設計
 
 転職活動の繰り返し作業を Claude Code スラッシュコマンドとスクリプトで自動化する。
+
+> **AI戦略・設計思想の正本は `04_AI/` を参照。**  
+> このフォルダはキャリア領域に特化した実装（コマンド・スクリプト）のみを管理する。
 
 ## ワークフロー一覧
 
@@ -24,7 +36,7 @@
 ```
 月曜朝:
   /project:career/career-catchup
-  → synthesis/ に市場メモ追記、戦略仮説の更新を確認
+  → 30_synthesis/ に市場メモ追記、戦略仮説の更新を確認
 
 応募発生時:
   bash 50_自動化/scripts/new_company.sh acme-corp "Acme株式会社"

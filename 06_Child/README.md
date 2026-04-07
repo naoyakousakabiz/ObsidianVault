@@ -1,3 +1,12 @@
+---
+date: 2026-04-08
+type: index
+domain: life
+status: active
+source: human
+tags: []
+---
+
 # 06_Child
 
 **子ども関連**のノート置き場（教育方針の**合意**自体は [[40_agreements/README|40_agreements]]、カレンダー用事は [[20_events/2026_ライフイベントまとめ|20_events]]）。

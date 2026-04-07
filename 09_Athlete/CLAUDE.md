@@ -31,7 +31,7 @@
 | `70_食事/` | 栄養管理・カーボ調整・レース前後の食事 |
 
 ## NotebookLM連携
-詳細データは `98_NotebookLM_Sync/09_Athlete/` に集約。分析・洞察はNotebookLMで行い、実行計画・結論だけをこのフォルダに保存する。
+詳細データは `98_NotebookLM_Sync/05_Athlete/` に集約（98配下の番号は本Vaultと異なる。対応表は `98_NotebookLM_Sync/00_index.md` を参照）。分析・洞察はNotebookLMで行い、実行計画・結論だけをこのフォルダに保存する。
 
 ## Claude Codeへの指示方針
 - トレーニングプラン生成時は現在のVO2max・競技レベルを参照すること
