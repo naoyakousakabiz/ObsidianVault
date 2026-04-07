@@ -173,8 +173,19 @@
               "icon": "lucide-list",
               "title": "Outline of デスクトップ接続テスト"
             }
+          },
+          {
+            "id": "7b719417d58d9adb",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
@@ -195,7 +206,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "eb7620626c3c3ebd",
+  "active": "7b719417d58d9adb",
   "lastOpenFiles": [
     "99_System/01_NotebookLM_GAS_同期スクリプト.md",
     "99_System/NotebookLM_Sync_Code.gs",

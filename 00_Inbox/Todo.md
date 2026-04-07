@@ -21,30 +21,6 @@ claudeで全文出す→claudecodeに依頼整理
   - NotebookLMとの同期設定に影響がないか確認
   - 影響ある場合はサブフォルダ名も変更が必要
 
-・obsidian-git 自動Push確認（手順どおりにやる）
-  1. **ターミナルを開く**（Vault ルート = ObsidianVault フォルダで `cd` 済みであること）
-  2. **リモートの最新を取る**  
-     `git fetch origin`
-  3. **リモートとローカルの先頭を並べて見る**  
-     `git log origin/main --oneline -3`  
-     `git log main --oneline -3`
-  4. **ずれの有無を数える（任意・はっきりさせる）**  
-     `git rev-list --left-right --count origin/main...main`  
-     - 出力が `0 0` → 同じ。**Push 済み**  
-     - 右側が 0 より大きい（例: `0 10`）→ **ローカルだけ進んでいる = 未 Push**
-  5. **Obsidian 側の設定を見る**  
-     アプリ → **設定** → **コミュニティプラグイン** → **Obsidian Git**  
-     - 「**Auto push**」がオンか  
-     - **コミット後に push する**系のオプション（表記は版による）が有効か
-  6. **まだ未 Push なら**  
-     - Obsidian を一度再起動してしばらく待つ（自動バックアップの間隔後）  
-     - または同じ Vault でターミナルから **`git push origin main`**（手動 1 回で切り分け）
-  7. **手動 push も失敗する場合**  
-     表示されたエラーで認証（PAT / SSH）・リモート URL・ブランチ名を確認
-
-  Obsidian 内 Terminal プラグインなら、各コマンドの先頭に `! ` を付けて実行する例：  
-  `! git fetch origin` → `! git log origin/main --oneline -3`
-
 ・Readwise
 
 ◯プラグイン追加
