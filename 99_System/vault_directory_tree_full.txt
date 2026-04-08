@@ -228,14 +228,14 @@
 ├── 01_Work/
 │   ├── 10_スキル/
 │   │   ├── 10_common/
-│   │   ├── 20_cs/
+│   │   ├── 20_CS業務/
 │   │   │   └── 01_CSナレッジ.md
-│   │   ├── 30_sales/
+│   │   ├── 30_営業/
 │   │   │   └── 01_Salesフレームワーク.md
 │   │   └── 01_スキルマップ.md
 │   ├── 20_プレイブック/
-│   │   ├── processes/
-│   │   ├── templates/
+│   │   ├── 20_プロセス/
+│   │   ├── 30_テンプレート/
 │   │   └── 01_業務フロー.md
 │   ├── 30_プロジェクト/
 │   ├── 40_マネジメント/
@@ -252,6 +252,7 @@
 │   │   │   │   ├── テンプレ_AI適用・人的判断の分界.md
 │   │   │   │   ├── テンプレ_スコープと関係者.md
 │   │   │   │   ├── テンプレ_ヒアリング項目一覧.md
+│   │   │   │   ├── テンプレ_優先度とROI試算.md
 │   │   │   │   ├── テンプレ_現状と課題.md
 │   │   │   │   └── ヒアリングシート_1.0.md
 │   │   │   ├── 20_設計/
@@ -274,9 +275,10 @@
 │   │   │   │   └── テンプレ_学びと事例.md
 │   │   │   ├── 99_アーカイブ/
 │   │   │   │   └── 00_README.md
-│   │   │   ├── 00_AI自動化_フォルダ設計.md
-│   │   │   ├── 00_Executiveセルフチェックリスト.md
-│   │   │   └── 00_背景と設計意図.md
+│   │   │   ├── 00_背景と設計意図.md
+│   │   │   ├── 01_AI導入ロードマップ.md
+│   │   │   ├── 02_フォルダ設計.md
+│   │   │   └── 03_Executiveセルフチェックリスト.md
 │   │   ├── 00_索引.md
 │   │   ├── 10_CS業務フロー分解.md
 │   │   ├── 20_工数と収支モデル.md
@@ -291,22 +293,22 @@
 ├── 03_Career/
 │   ├── 10_プロフィール/
 │   │   ├── 00_index.md
+│   │   ├── 00_README.md
 │   │   ├── 10_resume.md
 │   │   ├── 20_work_history.md
-│   │   ├── 30_traits.md
-│   │   └── 99_z_README.md
+│   │   └── 30_traits.md
 │   ├── 20_マスタ/
+│   │   ├── 00_README.md
 │   │   ├── 10_resume.md
-│   │   ├── 20_work_history.md
-│   │   └── 99_z_README.md
+│   │   └── 20_work_history.md
 │   ├── 30_キャリア戦略/
 │   │   ├── 30_synthesis/
-│   │   │   ├── 10_example_202604_synthesis_template.md
-│   │   │   └── 99_z_README.md
+│   │   │   ├── 00_README.md
+│   │   │   └── 10_example_202604_synthesis_template.md
 │   │   ├── 00_index.md
+│   │   ├── 00_README.md
 │   │   ├── 10_strategy.md
-│   │   ├── 20_planning.md
-│   │   └── 99_z_README.md
+│   │   └── 20_planning.md
 │   ├── 40_転職活動/
 │   │   ├── 10_campaigns/
 │   │   │   └── 10_202604_career_transition/
@@ -314,16 +316,15 @@
 │   │   │       │   └── _template/
 │   │   │       │       ├── 00_README.md
 │   │   │       │       ├── 10_company_info.md
-│   │   │       │       ├── 10_qa.md
-│   │   │       │       └── 99_z_README.md
+│   │   │       │       └── 10_qa.md
 │   │   │       ├── 00_pipeline.md
 │   │   │       ├── 00_README.md
 │   │   │       ├── 10_applications.md
 │   │   │       ├── 20_interviews.md
 │   │   │       └── 30_prep_common.md
-│   │   ├── _archive/
+│   │   ├── 99_アーカイブ/
 │   │   ├── 00_index.md
-│   │   └── 99_z_README.md
+│   │   └── 00_README.md
 │   ├── 50_自動化/
 │   │   ├── scripts/
 │   │   │   ├── new_company.sh
@@ -442,6 +443,7 @@
 │   ├── CLAUDE.md
 │   └── README.md
 ├── 06_Child/
+│   ├── CLAUDE.md
 │   └── README.md
 ├── 07_Asset/
 │   ├── 02_購入検討リスト.md
