@@ -51,6 +51,7 @@ tags: []
 - ツールの使い分け・運用フロー：`01_ツール運用/01_ツール役割と運用.md`
 - NotebookLMの11冊設計：`01_ツール運用/03_NotebookLM.md`
 - **Claude Code** スキル（`.claude/skills/`）設計の要点：`03_手法/ClaudeCode_スキル作成_ベストプラクティス.md`
+- **Cursor** で `CLAUDE.md` を講座相当で採点：**`/claude-md-improver`**（`.cursor/commands/claude-md-improver.md`。Claude Code 版スキルとは別）
 - 実績・KPI・対外説明のテンプレ参考：`99_archive/AI戦略_02_実績と対外説明.md`（**Deprecated**。実数の正は `03_Career` 等で管理）
 
 ---

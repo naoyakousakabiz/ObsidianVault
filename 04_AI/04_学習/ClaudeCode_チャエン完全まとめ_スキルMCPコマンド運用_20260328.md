@@ -5,7 +5,7 @@
 > **28+ スキル ｜ 16 MCP サービス ｜ コマンド一覧 ｜ Tips 30選 ｜ 自動化スケジュール**  
 > **最終更新（元資料）**: 2026年3月28日
 
-**関連（同一Vault）**: [[ClaudeCode_業務活用マスター講座_完全レジュメ_20260329]] ｜ [[ClaudeCode_業務活用マスター講座_QA132問_20260329]] ｜ [[ClaudeCode_30日ロードマップ_最強ガイドブック_20260329]] ｜ [[ClaudeCode_バイブコーディング完全マスター講座_概念からClaudeCodeまで]]
+**関連（同一Vault）**: [[ClaudeCode_スキル体系28種_カタログ]]（第2章の早見・抜粋）｜ [[ClaudeCode_業務活用マスター講座_完全レジュメ_20260329]] ｜ [[ClaudeCode_業務活用マスター講座_QA132問_20260329]] ｜ [[ClaudeCode_30日ロードマップ_最強ガイドブック_20260329]] ｜ [[ClaudeCode_バイブコーディング完全マスター講座_概念からClaudeCodeまで]]
 
 **元Notion**: [チャエンの Claude Code 完全まとめ](https://www.notion.so/Claude-Code-MCP-3300c6378bf1818d8ee6d31464c0bc4f?pvs=21)
 
