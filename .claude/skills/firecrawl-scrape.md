@@ -1,21 +1,48 @@
 ---
-# Claude Code スキル（Vault 同梱・チャエン完全まとめ準拠）
-# 正本解説: 04_AI/04_学習/ClaudeCode_チャエン完全まとめ_スキルMCPコマンド運用_20260328.md 第2章
-# 早見表: 04_AI/04_学習/ClaudeCode_スキル体系28種_カタログ.md
+id: firecrawl-scrape
+version: 1
+domains: [web-fetch]
+requires: [Firecrawl MCP または CLI]
+related: [firecrawl-search, firecrawl-map, firecrawl-crawl]
 ---
 
-    # /firecrawl-scrape — URL→Markdown
+# /firecrawl-scrape — 1 ページを本文として取り込む
 
-    **やること:** Firecrawl: URL→Markdown（エスカレーションフローの一角）
+## これは何か
 
-    **依存:** Firecrawl MCP または CLI
+**URL が決まっている 1 ページ**から本文を取り、Markdown など読みやすい形に整えます。サイト全体の横断はしません。
 
-    ## 実行手順
-    1. ユーザーの目的と「URL は既に分かっているか」を確認。
-2. 完全まとめの順（search→scrape→map→crawl→…）に当てはまる**最小の手段**から提案。
-3. レート制限・利用規約・個人情報を含むページは避ける。
+## いつ使うか
 
-    ## Vault での共通ルール
-    - クライアント固有情報・実名は扱わない（匿名化）。
-    - `clients/` 等の例パスは、このリポジトリの慣習に**置換**する。議事録・アウトプットの置き場はユーザーに確認する。
-    - MCP / API が無い操作は**テキスト案・手順だけ**出し、実行はユーザーが行う。
+- 公式ドキュメントの 1 本を要約や引用の材料にするとき
+- LLM に渡す用に、**ノイズの少ないテキスト**が欲しいとき
+
+## 使わないほうがよい場合
+
+- まず検索で候補を探したい → `firecrawl-search`
+- 同じドメインの**大量のページ** → `firecrawl-map` / `firecrawl-crawl`
+
+## 前提条件
+
+- Firecrawl が使えること。
+
+## どう依頼するか
+
+1. **`firecrawl-scrape`** と URL（複数なら少数に）。
+2. 出力形式（Markdown など）。ログインが要るページかどうか。
+
+**例:** 「`firecrawl-scrape`。`https://example.com/docs/install` を Markdown。タイトルと日付も。」
+
+## 進め方（エージェント向け）
+
+1. 静的ページか動的ページかの見立てをする。単純取得で失敗するなら browser の検討を添える。
+2. タイトルや更新日が取れれば残す。
+3. 失敗時は HTTP やブロックの理由を短く書く。
+
+## 完了の目安
+
+- **出典 URL と取得日**が付く（可能なら）
+- 1 本の読みやすい本文になっている
+- 認証ページを無理に突破しない
+
+**共通ルール:** [00_shared-governance.md](./00_shared-governance.md)
