@@ -1,15 +1,53 @@
 ./
 ├── .claude/
-│   └── commands/
-│       ├── career/
-│       │   ├── career-catchup.md
-│       │   ├── company-research.md
-│       │   ├── doc-custom.md
-│       │   ├── interview-review.md
-│       │   └── qa-gen.md
-│       ├── process-clippings.md
-│       └── process-kindle.md
+│   ├── commands/
+│   │   ├── career/
+│   │   │   ├── career-catchup.md
+│   │   │   ├── company-research.md
+│   │   │   ├── doc-custom.md
+│   │   │   ├── interview-review.md
+│   │   │   └── qa-gen.md
+│   │   ├── process-clippings.md
+│   │   └── process-kindle.md
+│   ├── skills/
+│   │   ├── 00_shared-governance.md
+│   │   ├── auto-minutes.md
+│   │   ├── calendar-today.md
+│   │   ├── daily-report.md
+│   │   ├── digirise-presentation.md
+│   │   ├── digirise-proposal.md
+│   │   ├── downloads-triage.md
+│   │   ├── edit-vertical-video.md
+│   │   ├── firecrawl-agent.md
+│   │   ├── firecrawl-browser.md
+│   │   ├── firecrawl-crawl.md
+│   │   ├── firecrawl-download.md
+│   │   ├── firecrawl-map.md
+│   │   ├── firecrawl-scrape.md
+│   │   ├── firecrawl-search.md
+│   │   ├── generate-article-images.md
+│   │   ├── generate-eval-excel.md
+│   │   ├── generate-proposal-excel.md
+│   │   ├── gogcli.md
+│   │   ├── job-eyecatch.md
+│   │   ├── morning-briefing.md
+│   │   ├── post-meeting.md
+│   │   ├── pre-meeting-setup.md
+│   │   ├── README.md
+│   │   ├── remotion-video.md
+│   │   ├── sf-daily-report.md
+│   │   ├── simplify.md
+│   │   ├── sync-client-registry.md
+│   │   ├── talmood-invoice.md
+│   │   ├── typefully-schedule.md
+│   │   ├── universal-meeting-minutes.md
+│   │   └── x-post-draft.md
+│   └── .DS_Store
 ├── .cursor/
+│   ├── commands/
+│   │   ├── claude-md-improver.md
+│   │   ├── daily-tasks.md
+│   │   └── make-daily-note.md
 │   └── rules/
 │       └── daily-note-voice.mdc
 ├── .obsidian/
@@ -285,6 +323,8 @@
 │   │   ├── 30_面談オペレーション設計.md
 │   │   ├── 40_CS改善テーマ一覧.md
 │   │   ├── 45_男性会員の評価傾向.md
+│   │   ├── 46_改善アイデア_インボックス.md
+│   │   ├── 47_業務棚卸し_6カテゴリ.md
 │   │   └── CLAUDE.md
 │   ├── 00_strategy.md
 │   ├── 10_業務改善とAI導入_コンサル納品フレーム.md
@@ -308,7 +348,11 @@
 │   │   ├── 00_index.md
 │   │   ├── 00_README.md
 │   │   ├── 10_strategy.md
-│   │   └── 20_planning.md
+│   │   ├── 20_planning.md
+│   │   ├── 01.md
+│   │   ├── 02.md
+│   │   ├── 03.md
+│   │   └── 統合.md
 │   ├── 40_転職活動/
 │   │   ├── 10_campaigns/
 │   │   │   └── 10_202604_career_transition/
@@ -375,23 +419,38 @@
 │   │   ├── 02_フォルダ設計.md
 │   │   └── 03_Executiveセルフチェックリスト.md
 │   ├── 03_手法/
-│   │   ├── AI読書術.md
-│   │   ├── API_CLI_MCP_完全理解レポート.md
-│   │   ├── NotebookLM_スライド作成セミナー_20260322.md
-│   │   ├── NotebookLM_概要紹介セミナー_20260322.md
-│   │   ├── オーケストレーションスキル.md
-│   │   ├── スライド作成_NotebookLM.md
-│   │   ├── ファクトチェック.md
-│   │   └── 定期実行_完全理解レポート.md
+│   │   ├── AI_オーケストレーション解説.md
+│   │   ├── AI_ファクトチェック実践.md
+│   │   ├── AI_読書の知識資産化.md
+│   │   ├── ClaudeCode_スキル設計の要点.md
+│   │   ├── ClaudeCode_動画テロップ自動Remotion.md
+│   │   ├── ClaudeCode_定期実行の選び方.md
+│   │   ├── MCP_APIとCLIの整理.md
+│   │   ├── NotebookLM_スライド作成セミナー要約.md
+│   │   ├── NotebookLM_スライド生成ガイド.md
+│   │   ├── NotebookLM_ビジネス図解プロンプト.md
+│   │   └── NotebookLM_概要セミナー要約.md
 │   ├── 04_学習/
-│   │   ├── ClaudeCode_30日ロードマップ_最強ガイドブック_20260329.md
-│   │   ├── ClaudeCode_チャエン完全まとめ_スキルMCPコマンド運用_20260328.md
-│   │   ├── ClaudeCode_バイブコーディング完全マスター講座_概念からClaudeCodeまで.md
-│   │   ├── ClaudeCode_業務活用マスター講座_QA132問_20260329.md
-│   │   ├── ClaudeCode_業務活用マスター講座_完全レジュメ_20260329.md
+│   │   ├── AI_ビジネス観点メモ.md
+│   │   ├── AI_ユースケース200選.md
+│   │   ├── AI_活用マインドセット.md
+│   │   ├── AI_活用事例まとめ.md
+│   │   ├── ClaudeCode_30日ロードマップ.md
+│   │   ├── ClaudeCode_MCPサーバー用途別メモ.md
+│   │   ├── ClaudeCode_スキル28種カタログ.md
+│   │   ├── ClaudeCode_スキル28種プロンプト集.md
+│   │   ├── ClaudeCode_チャエンまとめ_スキルMCP運用.md
+│   │   ├── ClaudeCode_バイブコーディング講座ノート.md
+│   │   ├── ClaudeCode_初期設定手順まとめ.md
+│   │   ├── ClaudeCode_業務活用講座_QA132問.md
+│   │   ├── ClaudeCode_業務活用講座_完全レジュメ.md
+│   │   ├── Obsidian_RSSとLINE取り込み設計.md
+│   │   ├── Obsidian_朝インプットohayo.md
 │   │   └── 今後やること.md
 │   ├── 80_実験ログ/
 │   │   └── 20260408_宿題リスト.md
+│   ├── 90_SNSノウハウ/
+│   │   └── note_有料記事タイトル設計メモ.md
 │   ├── 99_アーカイブ/
 │   │   ├── 09_人生設計ロードマップ.md
 │   │   ├── AI戦略_02_実績と対外説明.md
@@ -440,6 +499,7 @@
 │   ├── 80_documents/
 │   ├── 99_archive/
 │   │   └── 20260405_プロポーズ.md
+│   ├── 15_個人自動化候補一覧.md
 │   ├── CLAUDE.md
 │   └── README.md
 ├── 06_Child/
@@ -490,14 +550,20 @@
 │   │   ├── カスタマーサクセス・プロフェッショナル――顧客の成功を支え、持続的な利益成長をもたらす仕事のすべて.md
 │   │   ├── 具体と抽象.md
 │   │   └── 完全版 カスタマーサクセス実行戦略.md
-│   └── 02_Clippings/
-│       ├── _processed_log.md
-│       ├── CLAUDE.md
-│       ├── 初心者のためのトライアスロントレーニング計画法　～完走を目指して～.md
-│       └── 趣味で始めるスポーツ・運動のススメ.md
+│   ├── 02_Clippings/
+│   │   ├── _processed_log.md
+│   │   ├── CLAUDE.md
+│   │   ├── 初心者のためのトライアスロントレーニング計画法　～完走を目指して～.md
+│   │   └── 趣味で始めるスポーツ・運動のススメ.md
+│   ├── 03_RSS/
+│   │   ├── _購読リスト.md
+│   │   └── CLAUDE.md
+│   └── 04_LINE/
+│       └── CLAUDE.md
 ├── 80_Journal/
 │   ├── 01_Daily/
-│   │   └── 2026-04-08.md
+│   │   ├── 2026-04-08.md
+│   │   └── 2026-04-09.md
 │   ├── 02_Voice/
 │   │   └── 2026-04-08.m4a
 │   └── CLAUDE.md
@@ -538,7 +604,8 @@
 │   ├── scripts/
 │   │   ├── export_vault_tree.py
 │   │   ├── rename_voice_m4a.py
-│   │   └── sync_ringbell_ai_templates_from_generic.py
+│   │   ├── sync_ringbell_ai_templates_from_generic.py
+│   │   └── vertical_video_pipeline.py
 │   ├── Templates/
 │   │   ├── ai_catchup_template.md
 │   │   ├── Daily.md
@@ -550,7 +617,12 @@
 │   ├── vault_directory_tree_full.txt
 │   ├── Vault_Structure_Guide.md
 │   └── Vault整備TODO.md
+├── clients/
+│   └── 株式会社ABC/
+│       └── proposals/
+│           └── 株式会社ABC_AI提案書_2026-04-10.xlsx
 ├── .DS_Store
 ├── .gitattributes
 ├── .gitignore
+├── ActivityView.tsx
 └── CLAUDE.md

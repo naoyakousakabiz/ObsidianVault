@@ -29,6 +29,8 @@
 | [remotion-video.md](./remotion-video.md) | `/remotion-video` | Remotion で解説動画 | コードでレンダリング・テンプレ量産 |
 | [generate-article-images.md](./generate-article-images.md) | `/generate-article-images` | 記事用アイキャッチ | 章ごと画像プロンプト・alt 案 |
 | [job-eyecatch.md](./job-eyecatch.md) | `/job-eyecatch` | 求人ビジュアル案 | 採用バナー・サムネのプロンプト複数 |
+| [x-post-draft.md](./x-post-draft.md) | `/x-post-draft` | X 投稿文案 3案（140字・タグ案） | トピック入力・比較用下書き |
+| [typefully-schedule.md](./typefully-schedule.md) | `/typefully-schedule` | Typefully で X 予約投稿 | API・`publish_at`・curl 手順 |
 | [digirise-presentation.md](./digirise-presentation.md) | `/digirise-presentation` | スライド生成 | .pptx・python-pptx・ブランド遵守 |
 | [digirise-proposal.md](./digirise-proposal.md) | `/digirise-proposal` | 提案ダッシュボード | Vite+React+Tailwind・公開範囲の設計 |
 | [generate-proposal-excel.md](./generate-proposal-excel.md) | `/generate-proposal-excel` | 11シート提案書 Excel | ヒアリングから xlsx 草案 |
