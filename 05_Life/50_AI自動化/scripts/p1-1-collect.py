@@ -319,7 +319,7 @@ def load_previous_urls(path: Path) -> set[str]:
 
 
 def fetch_x_entries(
-    bearer_token: str,
+    api_key: str,
     now_jst: datetime,
     prev_urls: set[str],
     errors: list[str],
@@ -327,55 +327,49 @@ def fetch_x_entries(
     if not X_ACCOUNTS:
         return []
     from_query = " OR ".join(f"from:{a}" for a in X_ACCOUNTS)
-    query = f"({from_query}) -is:retweet"
+    query = f"({from_query}) -is:retweet -is:reply"
     params = urllib.parse.urlencode({
         "query": query,
-        "max_results": "100",
-        "tweet.fields": "public_metrics,created_at,author_id",
-        "expansions": "author_id",
-        "user.fields": "username",
+        "queryType": "Latest",
     })
-    url = f"https://api.twitter.com/2/tweets/search/recent?{params}"
+    url = f"https://api.twitterapi.io/twitter/tweet/advanced_search?{params}"
     req = urllib.request.Request(
         url,
-        headers={"Authorization": f"Bearer {bearer_token}", "User-Agent": USER_AGENT},
+        headers={"X-API-Key": api_key, "User-Agent": USER_AGENT},
     )
     try:
         with urllib.request.urlopen(req, timeout=20) as response:
             data = json.loads(response.read().decode("utf-8"))
     except urllib.error.HTTPError as exc:
-        if exc.code == 402:
-            print("[INFO] X収集スキップ: Basic tier未加入（$100/月）。P2で再有効化予定")
-            return []
-        errors.append(f"X取得失敗: {exc}")
+        errors.append(f"X取得失敗: HTTP {exc.code}")
         return []
     except Exception as exc:  # noqa: BLE001
         errors.append(f"X取得失敗: {exc}")
         return []
 
-    if "errors" in data and "data" not in data:
-        errors.append(f"X API エラー: {data['errors']}")
+    tweets = data.get("tweets", [])
+    if not tweets and data.get("msg"):
+        errors.append(f"X API エラー: {data['msg']}")
         return []
 
-    users = {u["id"]: u["username"] for u in data.get("includes", {}).get("users", [])}
     entries: list[Entry] = []
-    for tweet in data.get("data", []):
-        published = parse_date(tweet.get("created_at"))
+    for tweet in tweets:
+        published = parse_date(tweet.get("createdAt"))
         if not published or not in_recent_window(published, now_jst):
             continue
-        metrics = tweet.get("public_metrics", {})
-        if metrics.get("like_count", 0) < X_MIN_LIKES:
+        like_count = tweet.get("likeCount", 0) or 0
+        if like_count < X_MIN_LIKES:
             continue
         text = clean_text(tweet.get("text", ""))
-        # AI関連キーワードフィルタ
         if not any(kw.lower() in text.lower() for kw in PRIORITY_KEYWORDS):
             continue
-        tweet_id = tweet["id"]
-        username = users.get(tweet.get("author_id", ""), "unknown")
-        tweet_url = f"https://x.com/{username}/status/{tweet_id}"
+        username = tweet.get("author", {}).get("userName", "unknown")
+        tweet_id = tweet.get("id", "")
+        tweet_url = tweet.get("url") or f"https://x.com/{username}/status/{tweet_id}"
         if tweet_url in prev_urls:
             continue
-        summary = f"👍 {metrics.get('like_count', 0):,} / RT {metrics.get('retweet_count', 0):,}"
+        retweet_count = tweet.get("retweetCount", 0) or 0
+        summary = f"👍 {like_count:,} / RT {retweet_count:,}"
         priority = compute_priority(text, "")
         entries.append(Entry(
             section="x",
@@ -634,11 +628,11 @@ def main() -> int:
         except Exception as exc:  # noqa: BLE001
             errors.append(f"YouTube取得失敗 [{source}]: {exc}")
 
-    x_bearer_token = os.environ.get("X_BEARER_TOKEN")
-    if x_bearer_token:
-        x_entries = fetch_x_entries(x_bearer_token, now_jst, prev_urls, errors)
+    twitterapi_key = os.environ.get("TWITTERAPI_IO_KEY")
+    if twitterapi_key:
+        x_entries = fetch_x_entries(twitterapi_key, now_jst, prev_urls, errors)
     else:
-        print("[INFO] X収集スキップ: X_BEARER_TOKEN 未設定")
+        print("[INFO] X収集スキップ: TWITTERAPI_IO_KEY 未設定")
 
     rss_entries = sort_entries(rss_entries)[:RSS_DAILY_LIMIT]
     youtube_entries = sort_entries(youtube_entries)[:YOUTUBE_DAILY_LIMIT]

@@ -33,7 +33,7 @@ jobs:
         env:
           SLACK_BOT_TOKEN:    ${{ secrets.SLACK_BOT_TOKEN }}
           P11_SLACK_CHANNEL_ID: ${{ secrets.P11_SLACK_CHANNEL_ID }}
-          X_BEARER_TOKEN:     ${{ secrets.X_BEARER_TOKEN }}
+          TWITTERAPI_IO_KEY:  ${{ secrets.TWITTERAPI_IO_KEY }}
         run: |
           TODAY=$(TZ=Asia/Tokyo date +%Y-%m-%d)
           python "05_Life/50_AI自動化/scripts/p1-1-collect.py" \
