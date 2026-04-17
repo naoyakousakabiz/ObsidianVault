@@ -162,4 +162,6 @@ curl -s -X POST "https://slack.com/api/chat.postMessage" \
   -H "Content-Type: application/json; charset=utf-8" \
   -d "$PAYLOAD" > /dev/null
 
-echo "$(date): life-summary sent" >> ~/scripts/life-summary.log
+LOG_FILE="${HOME}/.config/lifeos/life-summary.log"
+mkdir -p "$(dirname "$LOG_FILE")"
+echo "$(date): life-summary sent" >> "$LOG_FILE"
