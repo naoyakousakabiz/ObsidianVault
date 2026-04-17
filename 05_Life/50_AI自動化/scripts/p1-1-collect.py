@@ -59,7 +59,7 @@ SLACK_TOPICS_LIMIT = 3
 # 24h内の更新を全件見せる運用に変更（上限なし）
 RSS_DAILY_LIMIT = 999
 YOUTUBE_DAILY_LIMIT = 999
-WEB_DISPLAY_LIMIT = 10
+WEB_DISPLAY_LIMIT = 5
 YOUTUBE_TRANSCRIPT_TOP_N = 2
 X_MIN_LIKES = 100
 X_DAILY_LIMIT = 5
@@ -266,11 +266,13 @@ def build_slack_topics(entries: list[Entry], limit: int = SLACK_TOPICS_LIMIT) ->
 def build_ai_news_briefs(entries: list[Entry], limit: int = AI_NEWS_TOP_LIMIT) -> list[str]:
     briefs: list[str] = []
     for i, entry in enumerate(entries[:limit], start=1):
-        brief = summarize_from_title(entry.title, limit=52)
+        brief = summarize_from_title(entry.title, limit=90)
         if is_too_similar(entry.title, brief):
-            brief = summarize(entry.summary, limit=52)
+            brief = summarize(entry.summary, limit=90)
+        published = entry.published.strftime("%m/%d %H:%M")
         briefs.append(
             f"{i}. {brief}\n"
+            f"   出典: {entry.source} / 時刻: {published}\n"
             f"   🔗 <{entry.url}|記事を開く>"
         )
     return briefs
@@ -295,14 +297,17 @@ def build_x_section(entries: list[Entry]) -> str:
     if not entries:
         return "- 該当なし"
     blocks = []
-    for entry in entries:
+    for i, entry in enumerate(entries, start=1):
+        published = entry.published.strftime("%m/%d %H:%M")
+        detail = summarize(entry.title, limit=120)
         blocks.append(
-            f"*{entry.source}*\n"
-            f"要点: {entry.title}\n"
-            f"{entry.summary}\n"
+            f"{i}) *{entry.source}*\n"
+            f"投稿時刻: {published}\n"
+            f"要点: {detail}\n"
+            f"指標: {entry.summary}\n"
             f"🔗 <{entry.url}|ツイートを開く>"
         )
-    return "\n\n━━━━━━━━━━\n\n".join(blocks)
+    return "\n\n──────────\n\n".join(blocks)
 
 
 def build_numbered_section(entries: list[Entry], display_limit: int) -> str:
@@ -310,13 +315,15 @@ def build_numbered_section(entries: list[Entry], display_limit: int) -> str:
         return "- 該当なし"
     items = []
     for i, entry in enumerate(entries[:display_limit], start=1):
-        brief = summarize(entry.summary, limit=80)
+        brief = summarize(entry.summary, limit=140)
         if brief == "要約なし" or len(brief) < 15:
-            brief = summarize_from_title(entry.title, limit=80)
+            brief = summarize_from_title(entry.title, limit=140)
+        published = entry.published.strftime("%m/%d %H:%M")
         items.append(
             f"{i}) {entry.title}\n"
-            f"   {brief}\n"
-            f"   🔗 <{entry.url}|開く>（{entry.source}）"
+            f"   要点: {brief}\n"
+            f"   出典: {entry.source} / 時刻: {published}\n"
+            f"   🔗 <{entry.url}|開く>"
         )
     result = "\n\n".join(items)
     remaining = len(entries) - display_limit
@@ -393,12 +400,12 @@ def fetch_x_entries(
             filtered_by_prev += 1
             continue
         retweet_count = tweet.get("retweetCount", 0) or 0
-        summary = f"👍 {like_count:,} / RT {retweet_count:,}"
+        summary = f"いいね {like_count:,} / RT {retweet_count:,}"
         priority = compute_priority(text, "")
         entries.append(Entry(
             section="x",
             source=f"@{username}",
-            title=summarize(text, limit=80),
+            title=summarize(text, limit=120),
             url=tweet_url,
             published=published,
             summary=summary,
@@ -434,20 +441,21 @@ def build_slack_message(
         f"・X: {len(x_entries)}件（24h）",
         f"・合計: {total}件",
     ]
+    # 最優先のAIトレンド確認ができるよう、Xセクションを最上段に配置する。
+    x_section = build_x_section(x_entries)
+    lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"𝕏 *X*（24h・{len(x_entries)}件）", x_section])
     ai_news_entries = [e for e in updates_24h if e.section == "rss" and e.source == AI_NEWS_FEED[0]]
     ai_news = build_ai_news_briefs(ai_news_entries, limit=min(len(ai_news_entries), AI_NEWS_TOP_LIMIT))
     if ai_news:
         lines.extend(["", "━━━━━━━━━━━━━━━━━━", "🧠 *AIニュース TOP5*（24h）", *ai_news])
     else:
         lines.extend(["", "━━━━━━━━━━━━━━━━━━", "🧠 *AIニュース TOP5*（24h）", "- 該当なし"])
-    web_filtered = [e for e in updates_24h if e.section == "rss" and e.source != AI_NEWS_FEED[0]]
-    web_section = build_numbered_section(web_filtered, WEB_DISPLAY_LIMIT)
-    lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"📰 *Web記事*（24h・{len(web_filtered)}件）", web_section])
     yt_filtered = [e for e in updates_24h if e.section == "youtube"]
     yt_section = build_numbered_section(yt_filtered, len(yt_filtered))
     lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"▶️ *YouTube*（24h・{len(yt_filtered)}件）", yt_section])
-    x_section = build_x_section(x_entries)
-    lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"𝕏 *X*（24h・{len(x_entries)}件）", x_section])
+    web_filtered = [e for e in updates_24h if e.section == "rss" and e.source != AI_NEWS_FEED[0]]
+    web_section = build_numbered_section(web_filtered, WEB_DISPLAY_LIMIT)
+    lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"📰 *Web記事*（24h・{len(web_filtered)}件）", web_section])
     lines.extend([
         "",
         "━━━━━━━━━━━━━━━━━━",
