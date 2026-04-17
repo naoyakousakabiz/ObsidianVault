@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- ジョブの一意識別子 -->
+    <key>Label</key>
+    <string>com.lifeos.p1-1-collect</string>
+
+    <!-- 実行コマンド -->
+    <key>ProgramArguments</key>
+    <array>
+        <!-- Full Disk Access を付与できる .app 経由で起動（TCC回避） -->
+        <string>/Users/kousakanaoya/Applications/LifeOS_P1-1.app/Contents/MacOS/applet</string>
+    </array>
+
+    <!-- 実行時刻: 毎朝 06:32 JST (ローカル時刻) -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>6</integer>
+        <key>Minute</key>
+        <integer>32</integer>
+    </dict>
+
+    <!-- 標準出力・エラーログ -->
+    <key>StandardOutPath</key>
+    <string>/Users/kousakanaoya/Library/Logs/com.lifeos.p1-1-collect.stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/kousakanaoya/Library/Logs/com.lifeos.p1-1-collect.stderr.log</string>
+
+    <!-- ロード時に即時実行しない -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <!-- 環境変数 (claude CLI を見つけるためのPATH) -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/Users/kousakanaoya/.npm/global/bin:/Users/kousakanaoya/.local/bin</string>
+        <key>HOME</key>
+        <string>/Users/kousakanaoya</string>
+        <key>LANG</key>
+        <string>ja_JP.UTF-8</string>
+    </dict>
+</dict>
+</plist>

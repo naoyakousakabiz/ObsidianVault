@@ -1,0 +1,52 @@
+name: P1-2 朝ブリーフ → #life-briefing
+
+on:
+  schedule:
+    - cron: '0 22 * * *'    # 07:00 JST (UTC+9)
+  workflow_dispatch:
+
+# 必要な GitHub Secrets:
+#   SLACK_BOT_TOKEN          — xoxb- で始まる Bot トークン
+#   P12_SLACK_CHANNEL_ID     — life-briefing チャンネル ID
+#   LIFE_OWNER_SLACK_ID      — メンション先の Slack ユーザー ID
+#   GOG_CREDENTIALS_B64      — base64(~/Library/Application Support/gogcli/credentials.json)
+#   GOG_TOKEN_B64            — base64(gog auth tokens export naoya.kousaka.biz@gmail.com -o -)
+#
+# Secrets 準備コマンド（ローカルで実行してクリップボードにコピー）:
+#   cat ~/Library/Application\ Support/gogcli/credentials.json | base64 | pbcopy
+#     → GitHub Secrets に GOG_CREDENTIALS_B64 として貼り付け
+#
+#   gog auth tokens export naoya.kousaka.biz@gmail.com --output /tmp/gog-token.json
+#   cat /tmp/gog-token.json | base64 | pbcopy && rm /tmp/gog-token.json
+#     → GitHub Secrets に GOG_TOKEN_B64 として貼り付け
+
+jobs:
+  briefing:
+    runs-on: macos-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install gogcli
+        run: brew install gogcli
+
+      - name: Restore gog credentials
+        run: |
+          mkdir -p "$HOME/Library/Application Support/gogcli"
+          echo "${{ secrets.GOG_CREDENTIALS_B64 }}" | base64 -d \
+            > "$HOME/Library/Application Support/gogcli/credentials.json"
+
+      - name: Import gog refresh token
+        run: |
+          echo "${{ secrets.GOG_TOKEN_B64 }}" | base64 -d > /tmp/gog-token.json
+          gog auth tokens import /tmp/gog-token.json
+          rm -f /tmp/gog-token.json
+
+      - name: Run morning briefing
+        env:
+          SLACK_BOT_TOKEN:      ${{ secrets.SLACK_BOT_TOKEN }}
+          P12_SLACK_CHANNEL_ID: ${{ secrets.P12_SLACK_CHANNEL_ID }}
+          LIFE_OWNER_SLACK_ID:  ${{ secrets.LIFE_OWNER_SLACK_ID }}
+        run: |
+          bash "05_Life/50_AI自動化/scripts/morning_briefing.sh"

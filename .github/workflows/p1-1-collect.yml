@@ -1,0 +1,45 @@
+name: P1-1 情報収集 → #life-info
+
+on:
+  schedule:
+    - cron: '32 21 * * *'   # 06:32 JST (UTC+9)
+  workflow_dispatch:         # 手動実行 / テスト用
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # 前日の収集ファイルを復元（重複配信防止）
+      - name: Restore previous collect cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/prev_collect.md
+          key: prev-collect-${{ github.run_id }}
+          restore-keys: |
+            prev-collect-
+
+      - name: 初回実行用の空ファイルを用意
+        run: touch /tmp/prev_collect.md
+
+      - name: Run P1-1 collector
+        env:
+          SLACK_BOT_TOKEN:    ${{ secrets.SLACK_BOT_TOKEN }}
+          P11_SLACK_CHANNEL_ID: ${{ secrets.P11_SLACK_CHANNEL_ID }}
+          X_BEARER_TOKEN:     ${{ secrets.X_BEARER_TOKEN }}
+        run: |
+          TODAY=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+          python "05_Life/50_AI自動化/scripts/p1-1-collect.py" \
+            --date "$TODAY" \
+            --output /tmp/collect.md \
+            --previous-file /tmp/prev_collect.md
+
+      - name: 今回の出力を次回用キャッシュに保存
+        run: cp /tmp/collect.md /tmp/prev_collect.md || true
