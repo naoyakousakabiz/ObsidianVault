@@ -59,6 +59,8 @@ SLACK_TOPICS_LIMIT = 3
 # 24h内の更新を全件見せる運用に変更（上限なし）
 RSS_DAILY_LIMIT = 999
 YOUTUBE_DAILY_LIMIT = 999
+WEB_DISPLAY_LIMIT = 10
+YOUTUBE_DISPLAY_LIMIT = 5
 YOUTUBE_TRANSCRIPT_TOP_N = 2
 X_MIN_LIKES = 100
 X_DAILY_LIMIT = 5
@@ -290,6 +292,26 @@ def build_youtube_channel_digest(entries: list[Entry]) -> list[str]:
     return blocks
 
 
+def build_numbered_section(entries: list[Entry], display_limit: int) -> str:
+    if not entries:
+        return "- 該当なし"
+    items = []
+    for i, entry in enumerate(entries[:display_limit], start=1):
+        brief = summarize(entry.summary, limit=80)
+        if brief == "要約なし" or len(brief) < 15:
+            brief = summarize_from_title(entry.title, limit=80)
+        items.append(
+            f"{i}) {entry.title}\n"
+            f"   {brief}\n"
+            f"   🔗 <{entry.url}|開く>（{entry.source}）"
+        )
+    result = "\n\n".join(items)
+    remaining = len(entries) - display_limit
+    if remaining > 0:
+        result += f"\n\n…（残り{remaining}件は省略）"
+    return result
+
+
 def load_previous_urls(path: Path) -> set[str]:
     if not path.exists():
         return set()
@@ -392,19 +414,12 @@ def build_slack_message(
         lines.extend(["", "━━━━━━━━━━━━━━━━━━", "🧠 *AIニュース TOP5*（24h）", *ai_news])
     else:
         lines.extend(["", "━━━━━━━━━━━━━━━━━━", "🧠 *AIニュース TOP5*（24h）", "- 該当なし"])
-    web_updates = build_slack_topics(
-        [e for e in updates_24h if e.section == "rss" and e.source != AI_NEWS_FEED[0]],
-        limit=len(rss_entries),
-    )
-    if web_updates:
-        lines.extend(["", "━━━━━━━━━━━━━━━━━━", "📰 *Web記事*（24h・全件）", *web_updates])
-    else:
-        lines.extend(["", "━━━━━━━━━━━━━━━━━━", "📰 *Web記事*（24h・全件）", "- 該当なし"])
-    youtube_updates = build_slack_topics([e for e in updates_24h if e.section == "youtube"], limit=len(youtube_entries))
-    if youtube_updates:
-        lines.extend(["", "━━━━━━━━━━━━━━━━━━", "▶️ *YouTube*（24h・全件）", *youtube_updates])
-    else:
-        lines.extend(["", "━━━━━━━━━━━━━━━━━━", "▶️ *YouTube*（24h・全件）", "- 該当なし"])
+    web_filtered = [e for e in updates_24h if e.section == "rss" and e.source != AI_NEWS_FEED[0]]
+    web_section = build_numbered_section(web_filtered, WEB_DISPLAY_LIMIT)
+    lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"📰 *Web記事*（24h・{len(web_filtered)}件）", web_section])
+    yt_filtered = [e for e in updates_24h if e.section == "youtube"]
+    yt_section = build_numbered_section(yt_filtered, YOUTUBE_DISPLAY_LIMIT)
+    lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"▶️ *YouTube*（24h・{len(yt_filtered)}件）", yt_section])
     x_updates = build_slack_topics([e for e in updates_24h if e.section == "x"], limit=len(x_entries))
     if x_updates:
         lines.extend(["", "━━━━━━━━━━━━━━━━━━", "【X】", *x_updates])

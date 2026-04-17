@@ -1,0 +1,52 @@
+name: P1-3a life-reminder → #life-reminder
+
+on:
+  schedule:
+    - cron: '0 21 * * *'    # 06:00 JST — トレーニング
+    - cron: '30 22 * * *'   # 07:30 JST — 朝食
+    - cron: '0 3 * * *'     # 12:00 JST — 昼食
+    - cron: '30 6 * * *'    # 15:30 JST — 補食
+    - cron: '0 10 * * *'    # 19:00 JST — 夕食
+  workflow_dispatch:
+    inputs:
+      type:
+        description: 'reminder type (training/breakfast/lunch/snack/dinner)'
+        required: true
+        default: breakfast
+
+# 必要な GitHub Secrets:
+#   SLACK_BOT_TOKEN              — xoxb- で始まる Bot トークン
+#   LIFE_REMINDER_SLACK_CHANNEL_ID — life-reminder チャンネル ID
+
+jobs:
+  reminder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine reminder type
+        id: type
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "TYPE=${{ github.event.inputs.type }}" >> "$GITHUB_OUTPUT"
+          else
+            # cron から種別を判定（UTC時刻で判断）
+            HOUR=$(date -u +%H)
+            MIN=$(date -u +%M)
+            if   [ "$HOUR" = "21" ]; then echo "TYPE=training"  >> "$GITHUB_OUTPUT"
+            elif [ "$HOUR" = "22" ]; then echo "TYPE=breakfast" >> "$GITHUB_OUTPUT"
+            elif [ "$HOUR" = "03" ]; then echo "TYPE=lunch"     >> "$GITHUB_OUTPUT"
+            elif [ "$HOUR" = "06" ]; then echo "TYPE=snack"     >> "$GITHUB_OUTPUT"
+            elif [ "$HOUR" = "10" ]; then echo "TYPE=dinner"    >> "$GITHUB_OUTPUT"
+            else echo "TYPE=breakfast" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+      - name: Run life-reminder
+        env:
+          SLACK_BOT_TOKEN:                   ${{ secrets.SLACK_BOT_TOKEN }}
+          LIFE_REMINDER_SLACK_CHANNEL_ID:    ${{ secrets.LIFE_REMINDER_SLACK_CHANNEL_ID }}
+        run: |
+          bash "05_Life/50_AI自動化/scripts/life-reminder.sh" "${{ steps.type.outputs.TYPE }}"
