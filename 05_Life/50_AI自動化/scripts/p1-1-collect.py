@@ -570,6 +570,23 @@ def is_bot_token(token: str) -> bool:
     return token.startswith("xoxb-")
 
 
+def env_int(name: str, default: int) -> int:
+    raw = os.environ.get(name)
+    if raw is None or not raw.strip():
+        return default
+    try:
+        return int(raw)
+    except ValueError:
+        return default
+
+
+def env_bool(name: str, default: bool) -> bool:
+    raw = os.environ.get(name)
+    if raw is None or not raw.strip():
+        return default
+    return raw.strip().lower() in {"1", "true", "yes", "on"}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--date", required=True)
@@ -630,7 +647,21 @@ def main() -> int:
 
     twitterapi_key = os.environ.get("TWITTERAPI_IO_KEY")
     if twitterapi_key:
+        x_min_likes = env_int("X_MIN_LIKES", 30)
+        x_require_keywords = env_bool("X_REQUIRE_PRIORITY_KEYWORDS", False)
+
+        # 実運用では0件回避を優先。条件は環境変数で厳しく戻せるようにする。
+        global X_MIN_LIKES  # noqa: PLW0603
+        X_MIN_LIKES = x_min_likes
+
+        if not x_require_keywords:
+            global PRIORITY_KEYWORDS  # noqa: PLW0603
+            PRIORITY_KEYWORDS = []
+
         x_entries = fetch_x_entries(twitterapi_key, now_jst, prev_urls, errors)
+        print(
+            f"[INFO] X抽出条件: min_likes={x_min_likes}, require_keywords={x_require_keywords}, accounts={len(X_ACCOUNTS)}"
+        )
     else:
         print("[INFO] X収集スキップ: TWITTERAPI_IO_KEY 未設定")
 
