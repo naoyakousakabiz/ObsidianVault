@@ -60,7 +60,6 @@ SLACK_TOPICS_LIMIT = 3
 RSS_DAILY_LIMIT = 999
 YOUTUBE_DAILY_LIMIT = 999
 WEB_DISPLAY_LIMIT = 10
-YOUTUBE_DISPLAY_LIMIT = 5
 YOUTUBE_TRANSCRIPT_TOP_N = 2
 X_MIN_LIKES = 100
 X_DAILY_LIMIT = 5
@@ -418,7 +417,7 @@ def build_slack_message(
     web_section = build_numbered_section(web_filtered, WEB_DISPLAY_LIMIT)
     lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"📰 *Web記事*（24h・{len(web_filtered)}件）", web_section])
     yt_filtered = [e for e in updates_24h if e.section == "youtube"]
-    yt_section = build_numbered_section(yt_filtered, YOUTUBE_DISPLAY_LIMIT)
+    yt_section = build_numbered_section(yt_filtered, len(yt_filtered))
     lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"▶️ *YouTube*（24h・{len(yt_filtered)}件）", yt_section])
     x_updates = build_slack_topics([e for e in updates_24h if e.section == "x"], limit=len(x_entries))
     if x_updates:

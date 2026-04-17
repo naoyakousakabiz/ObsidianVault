@@ -1,4 +1,4 @@
-name: P1-3a life-reminder → #life-reminder
+name: P1-3 食事・トレ通知 → #life-reminder
 
 on:
   schedule:
