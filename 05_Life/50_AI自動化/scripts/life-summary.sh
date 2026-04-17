@@ -6,7 +6,7 @@
 
 set -euo pipefail
 
-VAULT="/Users/kousakanaoya/Library/CloudStorage/GoogleDrive-naoya.kousaka.biz@gmail.com/マイドライブ/ObsibianVault"
+VAULT="${LIFE_SUMMARY_VAULT:-/Users/kousakanaoya/Library/CloudStorage/GoogleDrive-naoya.kousaka.biz@gmail.com/マイドライブ/ObsibianVault}"
 TODAY=$(TZ=Asia/Tokyo date +%Y-%m-%d)
 TODAY_JP=$(TZ=Asia/Tokyo date "+%Y年%m月%d日(%a)")
 DAILY_FILE="$VAULT/80_Journal/01_Daily/$TODAY.md"

@@ -18,12 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run life-summary (VAULT → GITHUB_WORKSPACE)
+      - name: Run life-summary
         env:
-          SLACK_BOT_TOKEN:      ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_BOT_TOKEN:               ${{ secrets.SLACK_BOT_TOKEN }}
           LIFE_SUMMARY_SLACK_CHANNEL_ID: ${{ secrets.P13_SLACK_CHANNEL_ID }}
-          LIFE_OWNER_SLACK_ID:  ${{ secrets.LIFE_OWNER_SLACK_ID }}
+          LIFE_OWNER_SLACK_ID:           ${{ secrets.LIFE_OWNER_SLACK_ID }}
+          LIFE_SUMMARY_VAULT:            ${{ github.workspace }}
         run: |
-          PATCHED=$(sed "s|^VAULT=.*|VAULT=\"${GITHUB_WORKSPACE}\"|" \
-            "05_Life/50_AI自動化/scripts/life-summary.sh")
-          bash <(printf '%s' "$PATCHED")
+          bash "05_Life/50_AI自動化/scripts/life-summary.sh"
