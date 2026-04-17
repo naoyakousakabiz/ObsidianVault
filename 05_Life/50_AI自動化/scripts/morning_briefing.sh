@@ -83,6 +83,11 @@ PAYLOAD=$(jq -n \
     {"type": "divider"},
     {
       "type": "section",
+      "text": {"type": "mrkdwn", "text": "1.  自分の人生を無駄にしない（命を大切に）\n2.  死を恐れず、今日を全力で\n3.  周りを大切に、伝えられるときに伝える"}
+    },
+    {"type": "divider"},
+    {
+      "type": "section",
       "text": {"type": "mrkdwn", "text": ("*📅  予定*\n" + $cal)}
     },
     {"type": "divider"},
