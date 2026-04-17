@@ -23,7 +23,7 @@ on:
 jobs:
   briefing:
     runs-on: macos-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v4
@@ -34,12 +34,20 @@ jobs:
       - name: Restore gog credentials
         run: |
           mkdir -p "$HOME/Library/Application Support/gogcli"
-          echo "${{ secrets.GOG_CREDENTIALS_B64 }}" | base64 -d \
+          if [ -z "${{ secrets.GOG_CREDENTIALS_B64 }}" ]; then
+            echo "GOG_CREDENTIALS_B64 is empty"
+            exit 1
+          fi
+          printf '%s' "${{ secrets.GOG_CREDENTIALS_B64 }}" | base64 -d \
             > "$HOME/Library/Application Support/gogcli/credentials.json"
 
       - name: Import gog refresh token
         run: |
-          echo "${{ secrets.GOG_TOKEN_B64 }}" | base64 -d > /tmp/gog-token.json
+          if [ -z "${{ secrets.GOG_TOKEN_B64 }}" ]; then
+            echo "GOG_TOKEN_B64 is empty"
+            exit 1
+          fi
+          printf '%s' "${{ secrets.GOG_TOKEN_B64 }}" | base64 -d > /tmp/gog-token.json
           gog auth tokens import /tmp/gog-token.json
           rm -f /tmp/gog-token.json
 
