@@ -353,20 +353,29 @@ def fetch_x_entries(
         return []
 
     entries: list[Entry] = []
+    total_tweets = len(tweets)
+    filtered_by_window = 0
+    filtered_by_likes = 0
+    filtered_by_keyword = 0
+    filtered_by_prev = 0
     for tweet in tweets:
         published = parse_date(tweet.get("createdAt"))
         if not published or not in_recent_window(published, now_jst):
+            filtered_by_window += 1
             continue
         like_count = tweet.get("likeCount", 0) or 0
         if like_count < X_MIN_LIKES:
+            filtered_by_likes += 1
             continue
         text = clean_text(tweet.get("text", ""))
         if not any(kw.lower() in text.lower() for kw in PRIORITY_KEYWORDS):
+            filtered_by_keyword += 1
             continue
         username = tweet.get("author", {}).get("userName", "unknown")
         tweet_id = tweet.get("id", "")
         tweet_url = tweet.get("url") or f"https://x.com/{username}/status/{tweet_id}"
         if tweet_url in prev_urls:
+            filtered_by_prev += 1
             continue
         retweet_count = tweet.get("retweetCount", 0) or 0
         summary = f"👍 {like_count:,} / RT {retweet_count:,}"
@@ -380,6 +389,15 @@ def fetch_x_entries(
             summary=summary,
             priority=priority,
         ))
+    print(
+        "[INFO] Xフィルタ結果:"
+        f" total={total_tweets},"
+        f" window={filtered_by_window},"
+        f" likes={filtered_by_likes},"
+        f" keywords={filtered_by_keyword},"
+        f" prev={filtered_by_prev},"
+        f" kept={len(entries)}"
+    )
     return sort_entries(entries)[:X_DAILY_LIMIT]
 
 
@@ -647,7 +665,7 @@ def main() -> int:
 
     twitterapi_key = os.environ.get("TWITTERAPI_IO_KEY")
     if twitterapi_key:
-        x_min_likes = env_int("X_MIN_LIKES", 30)
+        x_min_likes = env_int("X_MIN_LIKES", 10)
         x_require_keywords = env_bool("X_REQUIRE_PRIORITY_KEYWORDS", False)
 
         # 実運用では0件回避を優先。条件は環境変数で厳しく戻せるようにする。
