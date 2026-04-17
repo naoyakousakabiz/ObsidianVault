@@ -38,7 +38,7 @@ CAL_LINES=$(gog calendar events \
   | tail -n +2 \
   | awk -F'\t' '{printf "• %s〜%s　%s\n", $2, $3, $4}' || true)
 
-[[ -z "$CAL_LINES" ]] && CAL_LINES="なし"
+[[ -z "$CAL_LINES" ]] && CAL_LINES="なし（⚠️ 取得失敗 — GOG_TOKEN_B64 の期限切れの可能性あり）"
 
 # ── Daily: 今日の優先タスク抽出 ──────────────────────
 if [[ -f "$DAILY_FILE" ]]; then
