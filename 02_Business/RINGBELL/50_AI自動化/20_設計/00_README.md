@@ -1,16 +1,5 @@
----
-date: 2026-04-08
-type: index
-domain: business
-status: active
-source: claude-code
-generated_at: 2026-04-08
-reviewed: false
-tags: [RINGBELL, 設計, AI導入]
----
+# Legacy Entry
 
-# 20_設計
+このファイルは互換維持のために残しています。
 
-**役割:** **To-Be** と **システム境界**（ツール責務・データ正本）。時系列・撤退・コストは `30_実行計画/`。  
-**手順:** `../01_AI導入ロードマップ.md` の #14〜15。**テンプレ一覧:** `../02_フォルダ設計.md`。  
-**前後:** `../10_業務整理/` → 本フォルダ → `../30_実行計画/`
+正本は `README.md` を参照してください。

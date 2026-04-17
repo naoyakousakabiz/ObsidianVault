@@ -1,16 +1,5 @@
----
-date: 2026-04-08
-type: index
-domain: business
-status: active
-source: claude-code
-generated_at: 2026-04-08
-reviewed: false
-tags: [RINGBELL, 業務整理, AI導入]
----
+# Legacy Entry
 
-# 10_業務整理
+このファイルは互換維持のために残しています。
 
-**役割:** AI導入の**上流**（聞く・スコープ・現状・AI/HITLの境界）。  
-**手順:** `../01_AI導入ロードマップ.md` の #4〜13。**テンプレの一覧:** `../02_フォルダ設計.md` の表のみ（本READMEにファイルリストは書かない）。  
-**次:** `../20_設計/`
+正本は `README.md` を参照してください。

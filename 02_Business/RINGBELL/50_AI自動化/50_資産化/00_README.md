@@ -1,16 +1,5 @@
----
-date: 2026-04-08
-type: index
-domain: business
-status: active
-source: claude-code
-generated_at: 2026-04-08
-reviewed: false
-tags: [RINGBELL, ナレッジ, AI導入]
----
+# Legacy Entry
 
-# 50_資産化
+このファイルは互換維持のために残しています。
 
-**役割:** **再利用・対外説明可能**な学び・事例（匿名化）。  
-**手順:** `../01_AI導入ロードマップ.md` の #24。納品前は `../03_Executiveセルフチェックリスト.md`。
-**テンプレ一覧:** `../02_フォルダ設計.md`。
+正本は `README.md` を参照してください。
