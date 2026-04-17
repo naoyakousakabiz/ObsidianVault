@@ -60,3 +60,16 @@ jobs:
           LIFE_VOICE_SLACK_LINK:          ${{ secrets.LIFE_VOICE_SLACK_LINK }}
         run: |
           bash "05_Life/50_AI自動化/scripts/life-reminder.sh" "${{ steps.type.outputs.TYPE }}"
+
+      - name: Notify Slack on failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          LIFE_REMINDER_SLACK_CHANNEL_ID: ${{ secrets.LIFE_REMINDER_SLACK_CHANNEL_ID }}
+        run: |
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          TEXT=":rotating_light: P1-3 リマインダーが失敗しました (type=${{ steps.type.outputs.TYPE }})\n${RUN_URL}"
+          curl -s -X POST "https://slack.com/api/chat.postMessage" \
+            -H "Authorization: Bearer ${SLACK_BOT_TOKEN}" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"channel\":\"${LIFE_REMINDER_SLACK_CHANNEL_ID}\",\"text\":\"${TEXT}\"}" >/dev/null

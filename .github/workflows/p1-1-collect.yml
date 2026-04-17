@@ -43,3 +43,16 @@ jobs:
 
       - name: 今回の出力を次回用キャッシュに保存
         run: cp /tmp/collect.md /tmp/prev_collect.md || true
+
+      - name: Notify Slack on failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          P11_SLACK_CHANNEL_ID: ${{ secrets.P11_SLACK_CHANNEL_ID }}
+        run: |
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          TEXT=":rotating_light: P1-1 情報収集が失敗しました\n${RUN_URL}"
+          curl -s -X POST "https://slack.com/api/chat.postMessage" \
+            -H "Authorization: Bearer ${SLACK_BOT_TOKEN}" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"channel\":\"${P11_SLACK_CHANNEL_ID}\",\"text\":\"${TEXT}\"}" >/dev/null
