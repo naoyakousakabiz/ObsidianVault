@@ -369,7 +369,7 @@ def fetch_x_entries(
         errors.append(f"X取得失敗: {exc}")
         return []
 
-    tweets = data.get("tweets", [])
+    tweets = data.get("tweets") or []
     if not tweets and data.get("msg"):
         errors.append(f"X API エラー: {data['msg']}")
         return []
@@ -624,6 +624,16 @@ def env_int(name: str, default: int) -> int:
         return default
 
 
+def env_float(name: str, default: float) -> float:
+    raw = os.environ.get(name)
+    if raw is None or not raw.strip():
+        return default
+    try:
+        return float(raw)
+    except ValueError:
+        return default
+
+
 def env_bool(name: str, default: bool) -> bool:
     raw = os.environ.get(name)
     if raw is None or not raw.strip():
@@ -729,8 +739,8 @@ def main() -> int:
     if twitterapi_key:
         x_min_likes = env_int("X_MIN_LIKES", 10)
         x_require_keywords = env_bool("X_REQUIRE_PRIORITY_KEYWORDS", False)
-        x_api_price_per_call = float(os.environ.get("X_API_PRICE_PER_CALL", "0.00015"))
-        x_cost_alert_threshold = float(os.environ.get("X_COST_ALERT_THRESHOLD_USD", "1.0"))
+        x_api_price_per_call = env_float("X_API_PRICE_PER_CALL", 0.00015)
+        x_cost_alert_threshold = env_float("X_COST_ALERT_THRESHOLD_USD", 1.0)
         x_usage_file = Path(os.environ.get("P11_X_USAGE_FILE", "/tmp/x_usage_monthly.json"))
 
         # 実運用では0件回避を優先。条件は環境変数で厳しく戻せるようにする。
