@@ -21,28 +21,34 @@ jobs:
       - name: Restore previous collect cache
         uses: actions/cache@v4
         with:
-          path: /tmp/prev_collect.md
+          path: /tmp/p11-cache
           key: prev-collect-${{ github.run_id }}
           restore-keys: |
             prev-collect-
 
       - name: 初回実行用の空ファイルを用意
-        run: touch /tmp/prev_collect.md
+        run: |
+          mkdir -p /tmp/p11-cache
+          touch /tmp/p11-cache/prev_collect.md
+          touch /tmp/p11-cache/x_usage_monthly.json
 
       - name: Run P1-1 collector
         env:
           SLACK_BOT_TOKEN:    ${{ secrets.SLACK_BOT_TOKEN }}
           P11_SLACK_CHANNEL_ID: ${{ secrets.P11_SLACK_CHANNEL_ID }}
           TWITTERAPI_IO_KEY:  ${{ secrets.TWITTERAPI_IO_KEY }}
+          P11_X_USAGE_FILE:   /tmp/p11-cache/x_usage_monthly.json
+          X_API_PRICE_PER_CALL: "0.00015"
+          X_COST_ALERT_THRESHOLD_USD: "1.0"
         run: |
           TODAY=$(TZ=Asia/Tokyo date +%Y-%m-%d)
           python "05_Life/50_AI自動化/scripts/p1-1-collect.py" \
             --date "$TODAY" \
             --output /tmp/collect.md \
-            --previous-file /tmp/prev_collect.md
+            --previous-file /tmp/p11-cache/prev_collect.md
 
       - name: 今回の出力を次回用キャッシュに保存
-        run: cp /tmp/collect.md /tmp/prev_collect.md || true
+        run: cp /tmp/collect.md /tmp/p11-cache/prev_collect.md || true
 
       - name: Notify Slack on failure
         if: failure()

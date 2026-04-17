@@ -428,6 +428,7 @@ def build_slack_message(
     rss_entries: list[Entry],
     youtube_entries: list[Entry],
     x_entries: list[Entry],
+    x_usage_summary: str = "",
 ) -> str:
     total = len(rss_entries) + len(youtube_entries) + len(x_entries)
     updates_24h = sort_entries(rss_entries + youtube_entries + x_entries)
@@ -444,6 +445,8 @@ def build_slack_message(
     # 最優先のAIトレンド確認ができるよう、Xセクションを最上段に配置する。
     x_section = build_x_section(x_entries)
     lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"𝕏 *X*（24h・{len(x_entries)}件）", x_section])
+    if x_usage_summary:
+        lines.extend(["", f"💳 *X API料金ウォッチ* {x_usage_summary}"])
     ai_news_entries = [e for e in updates_24h if e.section == "rss" and e.source == AI_NEWS_FEED[0]]
     ai_news = build_ai_news_briefs(ai_news_entries, limit=min(len(ai_news_entries), AI_NEWS_TOP_LIMIT))
     if ai_news:
@@ -628,6 +631,41 @@ def env_bool(name: str, default: bool) -> bool:
     return raw.strip().lower() in {"1", "true", "yes", "on"}
 
 
+def load_x_usage(path: Path) -> dict[str, dict[str, float]]:
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def save_x_usage(path: Path, usage: dict[str, dict[str, float]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(usage, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def update_x_usage(
+    usage_path: Path,
+    date_str: str,
+    call_count: int,
+    price_per_call: float,
+) -> dict[str, float]:
+    month_key = date_str[:7]
+    usage = load_x_usage(usage_path)
+    current = usage.get(month_key, {})
+    calls = int(current.get("calls", 0)) + call_count
+    est = round(calls * price_per_call, 6)
+    usage[month_key] = {
+        "calls": calls,
+        "price_per_call": price_per_call,
+        "estimated_cost_usd": est,
+    }
+    save_x_usage(usage_path, usage)
+    return usage[month_key]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--date", required=True)
@@ -687,9 +725,13 @@ def main() -> int:
             errors.append(f"YouTube取得失敗 [{source}]: {exc}")
 
     twitterapi_key = os.environ.get("TWITTERAPI_IO_KEY")
+    x_usage_summary = ""
     if twitterapi_key:
         x_min_likes = env_int("X_MIN_LIKES", 10)
         x_require_keywords = env_bool("X_REQUIRE_PRIORITY_KEYWORDS", False)
+        x_api_price_per_call = float(os.environ.get("X_API_PRICE_PER_CALL", "0.00015"))
+        x_cost_alert_threshold = float(os.environ.get("X_COST_ALERT_THRESHOLD_USD", "1.0"))
+        x_usage_file = Path(os.environ.get("P11_X_USAGE_FILE", "/tmp/x_usage_monthly.json"))
 
         # 実運用では0件回避を優先。条件は環境変数で厳しく戻せるようにする。
         global X_MIN_LIKES  # noqa: PLW0603
@@ -702,6 +744,21 @@ def main() -> int:
             errors,
             require_keywords=x_require_keywords,
         )
+        x_usage = update_x_usage(
+            usage_path=x_usage_file,
+            date_str=args.date,
+            call_count=1,
+            price_per_call=x_api_price_per_call,
+        )
+        x_usage_summary = (
+            f"今月 call数={int(x_usage['calls'])} / "
+            f"推定=${x_usage['estimated_cost_usd']:.4f}"
+        )
+        if x_usage["estimated_cost_usd"] >= x_cost_alert_threshold:
+            errors.append(
+                f"X API推定コスト警告: ${x_usage['estimated_cost_usd']:.4f} "
+                f"(閾値 ${x_cost_alert_threshold:.2f})"
+            )
         print(
             f"[INFO] X抽出条件: min_likes={x_min_likes}, require_keywords={x_require_keywords}, accounts={len(X_ACCOUNTS)}"
         )
@@ -723,7 +780,13 @@ def main() -> int:
         if not is_bot_token(slack_token):
             print("Slack通知スキップ: xoxb ボットトークンを設定してください", file=sys.stderr)
             return 1
-        message = build_slack_message(args.date, rss_entries, youtube_entries, x_entries)
+        message = build_slack_message(
+            args.date,
+            rss_entries,
+            youtube_entries,
+            x_entries,
+            x_usage_summary=x_usage_summary,
+        )
         try:
             send_slack_message(slack_token, slack_channel, message)
             print("Slack通知: 送信成功")
