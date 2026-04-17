@@ -4,6 +4,8 @@
 
 set -euo pipefail
 
+mkdir -p ~/scripts
+
 ACCOUNT="naoya.kousaka.biz@gmail.com"
 TODAY=$(date "+%Y年%m月%d日(%a)")
 _VAULT="${MORNING_BRIEFING_VAULT:-/Users/kousakanaoya/Library/CloudStorage/GoogleDrive-naoya.kousaka.biz@gmail.com/マイドライブ/ObsibianVault}"
