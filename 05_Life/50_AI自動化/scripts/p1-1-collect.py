@@ -420,10 +420,7 @@ def build_slack_message(
     yt_section = build_numbered_section(yt_filtered, len(yt_filtered))
     lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"▶️ *YouTube*（24h・{len(yt_filtered)}件）", yt_section])
     x_updates = build_slack_topics([e for e in updates_24h if e.section == "x"], limit=len(x_entries))
-    if x_updates:
-        lines.extend(["", "━━━━━━━━━━━━━━━━━━", "【X】", *x_updates])
-    else:
-        lines.extend(["", "━━━━━━━━━━━━━━━━━━", "【X】", "- 該当なし"])
+    lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"𝕏 *X*（24h・{len(x_entries)}件）", *(x_updates if x_updates else ["- 該当なし"])])
     lines.extend([
         "",
         "━━━━━━━━━━━━━━━━━━",
