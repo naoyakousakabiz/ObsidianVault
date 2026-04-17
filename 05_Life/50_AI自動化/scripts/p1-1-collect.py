@@ -323,6 +323,7 @@ def fetch_x_entries(
     now_jst: datetime,
     prev_urls: set[str],
     errors: list[str],
+    require_keywords: bool = True,
 ) -> list[Entry]:
     if not X_ACCOUNTS:
         return []
@@ -368,7 +369,7 @@ def fetch_x_entries(
             filtered_by_likes += 1
             continue
         text = clean_text(tweet.get("text", ""))
-        if not any(kw.lower() in text.lower() for kw in PRIORITY_KEYWORDS):
+        if require_keywords and not any(kw.lower() in text.lower() for kw in PRIORITY_KEYWORDS):
             filtered_by_keyword += 1
             continue
         username = tweet.get("author", {}).get("userName", "unknown")
@@ -672,11 +673,13 @@ def main() -> int:
         global X_MIN_LIKES  # noqa: PLW0603
         X_MIN_LIKES = x_min_likes
 
-        if not x_require_keywords:
-            global PRIORITY_KEYWORDS  # noqa: PLW0603
-            PRIORITY_KEYWORDS = []
-
-        x_entries = fetch_x_entries(twitterapi_key, now_jst, prev_urls, errors)
+        x_entries = fetch_x_entries(
+            twitterapi_key,
+            now_jst,
+            prev_urls,
+            errors,
+            require_keywords=x_require_keywords,
+        )
         print(
             f"[INFO] X抽出条件: min_likes={x_min_likes}, require_keywords={x_require_keywords}, accounts={len(X_ACCOUNTS)}"
         )
