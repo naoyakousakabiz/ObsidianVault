@@ -1,5 +1,8 @@
-# Legacy Entry
+---
+status: archived
+date: 2026-04-17
+---
 
-このファイルは互換維持のために残しています。
+# このファイルは廃止されました
 
-正本は `README.md` を参照してください。
+正本は [`README.md`](README.md) を参照してください。
