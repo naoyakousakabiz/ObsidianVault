@@ -291,6 +291,20 @@ def build_youtube_channel_digest(entries: list[Entry]) -> list[str]:
     return blocks
 
 
+def build_x_section(entries: list[Entry]) -> str:
+    if not entries:
+        return "- 該当なし"
+    blocks = []
+    for entry in entries:
+        blocks.append(
+            f"*{entry.source}*\n"
+            f"要点: {entry.title}\n"
+            f"{entry.summary}\n"
+            f"🔗 <{entry.url}|ツイートを開く>"
+        )
+    return "\n\n━━━━━━━━━━\n\n".join(blocks)
+
+
 def build_numbered_section(entries: list[Entry], display_limit: int) -> str:
     if not entries:
         return "- 該当なし"
@@ -432,8 +446,8 @@ def build_slack_message(
     yt_filtered = [e for e in updates_24h if e.section == "youtube"]
     yt_section = build_numbered_section(yt_filtered, len(yt_filtered))
     lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"▶️ *YouTube*（24h・{len(yt_filtered)}件）", yt_section])
-    x_updates = build_slack_topics([e for e in updates_24h if e.section == "x"], limit=len(x_entries))
-    lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"𝕏 *X*（24h・{len(x_entries)}件）", *(x_updates if x_updates else ["- 該当なし"])])
+    x_section = build_x_section(x_entries)
+    lines.extend(["", "━━━━━━━━━━━━━━━━━━", f"𝕏 *X*（24h・{len(x_entries)}件）", x_section])
     lines.extend([
         "",
         "━━━━━━━━━━━━━━━━━━",
