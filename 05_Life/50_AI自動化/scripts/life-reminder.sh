@@ -81,4 +81,7 @@ curl -s -X POST "https://slack.com/api/chat.postMessage" \
   -H "Content-Type: application/json; charset=utf-8" \
   -d "$PAYLOAD" > /dev/null
 
-echo "$(date): reminder sent [$TYPE]" >> ~/scripts/life-reminder.log
+# p1-1.env と同じ ~/.config/lifeos/ にログ（CI では親ディレクトリが無いことがある）
+LOG_FILE="${HOME}/.config/lifeos/life-reminder.log"
+mkdir -p "$(dirname "$LOG_FILE")"
+echo "$(date): reminder sent [$TYPE]" >> "$LOG_FILE"
