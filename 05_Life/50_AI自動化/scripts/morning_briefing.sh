@@ -6,7 +6,8 @@ set -euo pipefail
 
 ACCOUNT="naoya.kousaka.biz@gmail.com"
 TODAY=$(date "+%Y年%m月%d日(%a)")
-DAILY_FILE="/Users/kousakanaoya/Library/CloudStorage/GoogleDrive-naoya.kousaka.biz@gmail.com/マイドライブ/ObsibianVault/80_Journal/01_Daily/$(date +%Y-%m-%d).md"
+_VAULT="${MORNING_BRIEFING_VAULT:-/Users/kousakanaoya/Library/CloudStorage/GoogleDrive-naoya.kousaka.biz@gmail.com/マイドライブ/ObsibianVault}"
+DAILY_FILE="$_VAULT/80_Journal/01_Daily/$(date +%Y-%m-%d).md"
 ENV_FILE="$HOME/.config/lifeos/p1-1.env"
 
 if [[ -f "$ENV_FILE" ]]; then

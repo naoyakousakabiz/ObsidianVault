@@ -22,7 +22,7 @@ on:
 
 jobs:
   briefing:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 20
 
     steps:
@@ -55,8 +55,9 @@ jobs:
 
       - name: Run morning briefing
         env:
-          SLACK_BOT_TOKEN:      ${{ secrets.SLACK_BOT_TOKEN }}
-          P12_SLACK_CHANNEL_ID: ${{ secrets.P12_SLACK_CHANNEL_ID }}
-          LIFE_OWNER_SLACK_ID:  ${{ secrets.LIFE_OWNER_SLACK_ID }}
+          SLACK_BOT_TOKEN:            ${{ secrets.SLACK_BOT_TOKEN }}
+          P12_SLACK_CHANNEL_ID:       ${{ secrets.P12_SLACK_CHANNEL_ID }}
+          LIFE_OWNER_SLACK_ID:        ${{ secrets.LIFE_OWNER_SLACK_ID }}
+          MORNING_BRIEFING_VAULT:     ${{ github.workspace }}
         run: |
           bash "05_Life/50_AI自動化/scripts/morning_briefing.sh"
