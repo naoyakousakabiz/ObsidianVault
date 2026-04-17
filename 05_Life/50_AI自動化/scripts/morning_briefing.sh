@@ -74,30 +74,21 @@ PAYLOAD=$(jq -n \
   --arg tasks "$TASK_LINES" \
 '{
   "channel": $channel,
-  "text": ("📅 朝ブリーフ <@" + $mention + ">"),
+  "text": ("⚡ Good Morning <@" + $mention + ">"),
   "blocks": [
     {
-      "type": "header",
-      "text": {"type": "plain_text", "text": ("🌅 " + $today + " のブリーフィング")}
-    },
-    {
       "type": "section",
-      "text": {"type": "mrkdwn", "text": ("<@" + $mention + "> 朝ブリーフを送ります")}
+      "text": {"type": "mrkdwn", "text": ("⚡ *Good Morning* <@" + $mention + ">  —  " + $today)}
     },
     {"type": "divider"},
     {
       "type": "section",
-      "text": {"type": "mrkdwn", "text": ("*📅 今日の予定*\n" + $cal)}
+      "text": {"type": "mrkdwn", "text": ("*📅  予定*\n" + $cal)}
     },
     {"type": "divider"},
     {
       "type": "section",
-      "text": {"type": "mrkdwn", "text": ("*✅ 今日の優先タスク*\n" + $tasks)}
-    },
-    {"type": "divider"},
-    {
-      "type": "context",
-      "elements": [{"type": "mrkdwn", "text": "今日も頑張りましょう！"}]
+      "text": {"type": "mrkdwn", "text": ("*☑️  タスク*\n" + $tasks)}
     }
   ]
 }')
