@@ -9,12 +9,13 @@ on:
 #   SLACK_BOT_TOKEN          — xoxb- で始まる Bot トークン
 #   P12_SLACK_CHANNEL_ID     — life-briefing チャンネル ID
 #   LIFE_OWNER_SLACK_ID      — メンション先の Slack ユーザー ID
-#   GOG_CREDENTIALS_B64      — base64(~/Library/Application Support/gogcli/credentials.json)
+#   GOG_CREDENTIALS_B64      — base64(~/.config/gogcli/credentials.json) ※Linux XDG パス
 #   GOG_TOKEN_B64            — base64(gog auth tokens export naoya.kousaka.biz@gmail.com -o -)
+#   GOG_KEYRING_PASSWORD     — CI上のキーリング用パスワード（任意の文字列でよい）
 #
 # Secrets 準備コマンド（ローカルで実行してクリップボードにコピー）:
 #   cat ~/Library/Application\ Support/gogcli/credentials.json | base64 | pbcopy
-#     → GitHub Secrets に GOG_CREDENTIALS_B64 として貼り付け
+#     → GitHub Secrets に GOG_CREDENTIALS_B64 として貼り付け（macOS の場合も同じファイルでよい）
 #
 #   gog auth tokens export naoya.kousaka.biz@gmail.com --output /tmp/gog-token.json
 #   cat /tmp/gog-token.json | base64 | pbcopy && rm /tmp/gog-token.json
@@ -29,21 +30,27 @@ jobs:
       - uses: actions/checkout@v5
 
       - name: Install gogcli
-        run: brew install gogcli
+        run: |
+          curl -fsSL \
+            "https://github.com/steipete/gogcli/releases/download/v0.12.0/gogcli_0.12.0_linux_amd64.tar.gz" \
+            | tar -xz -C "$RUNNER_TEMP"
+          sudo mv "$RUNNER_TEMP/gog" /usr/local/bin/gog
 
       - name: Restore gog credentials
         run: |
-          mkdir -p "$HOME/Library/Application Support/gogcli"
+          mkdir -p "$HOME/.config/gogcli"
           if [ -z "${{ secrets.GOG_CREDENTIALS_B64 }}" ]; then
             echo "GOG_CREDENTIALS_B64 is empty"
             exit 1
           fi
           printf '%s' "${{ secrets.GOG_CREDENTIALS_B64 }}" | base64 -d \
-            > "$HOME/Library/Application Support/gogcli/credentials.json"
+            > "$HOME/.config/gogcli/credentials.json"
 
       - name: Import gog refresh token
         timeout-minutes: 1
         continue-on-error: true
+        env:
+          GOG_KEYRING_PASSWORD: ${{ secrets.GOG_KEYRING_PASSWORD }}
         run: |
           if [ -z "${{ secrets.GOG_TOKEN_B64 }}" ]; then
             echo "GOG_TOKEN_B64 is empty"
@@ -59,5 +66,6 @@ jobs:
           P12_SLACK_CHANNEL_ID:       ${{ secrets.P12_SLACK_CHANNEL_ID }}
           LIFE_OWNER_SLACK_ID:        ${{ secrets.LIFE_OWNER_SLACK_ID }}
           MORNING_BRIEFING_VAULT:     ${{ github.workspace }}
+          GOG_KEYRING_PASSWORD:       ${{ secrets.GOG_KEYRING_PASSWORD }}
         run: |
           bash "05_Life/50_AI自動化/scripts/morning_briefing.sh"
