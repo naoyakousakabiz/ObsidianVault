@@ -18,51 +18,53 @@ if [[ -f "$ENV_FILE" ]]; then
   set +a
 fi
 
-SLACK_TOKEN="${SLACK_BOT_TOKEN:-}"
+# SLACK_BOT_TOKEN または SLACK_TOKEN（どちらか）。CRLF・前後空白・囲み " を除去
+_raw="${SLACK_BOT_TOKEN:-${SLACK_TOKEN:-}}"
+_raw="${_raw//$'\r'/}"
+SLACK_TOKEN="${_raw#"${_raw%%[![:space:]]*}"}"
+SLACK_TOKEN="${SLACK_TOKEN%"${SLACK_TOKEN##*[![:space:]]}"}"
+if [[ "$SLACK_TOKEN" == \"*\" ]]; then
+  SLACK_TOKEN="${SLACK_TOKEN#\"}"
+  SLACK_TOKEN="${SLACK_TOKEN%\"}"
+fi
+
 SLACK_CHANNEL="${LIFE_REMINDER_SLACK_CHANNEL_ID:-C0ASQ7MTL7R}"
 MENTION_ID="${LIFE_OWNER_SLACK_ID:-U0ARZH32TSQ}"
 
 if [[ -z "$SLACK_TOKEN" ]]; then
-  echo "$(date): missing SLACK_BOT_TOKEN" >&2
+  echo "$(date): missing SLACK_BOT_TOKEN or SLACK_TOKEN in $ENV_FILE" >&2
   exit 1
 fi
-if [[ "$SLACK_TOKEN" != xoxb-* ]]; then
-  echo "$(date): invalid token type" >&2
+# Bot: xoxb- / User OAuth: xoxp-（chat.postMessage に権限があれば可）
+if [[ ! "$SLACK_TOKEN" =~ ^xox[bp]- ]]; then
+  echo "$(date): Slack トークンは xoxb-（Bot）または xoxp-（User）で始まる必要があります" >&2
   exit 1
 fi
 
 case "$TYPE" in
   breakfast)
-    EMOJI="🍳"
-    TEXT="朝食の時間です。しっかり摂り、午前の活動に備えましょう。"
+    TEXT="朝食！"
     ;;
   lunch)
-    EMOJI="🍱"
-    TEXT="昼食の時間です。午後の予定に向けて、十分に補給しましょう。"
+    TEXT="12:00に昼飯！"
     ;;
   snack)
-    EMOJI="🥜"
-    TEXT="補食の時間です。トレーニングや午後の業務に備え、適宜摂取しましょう。"
+    TEXT="補食！！"
     ;;
   dinner)
-    EMOJI="🥗"
-    TEXT="夕食の時間です。"
+    TEXT="18:30までに夜ご飯！！"
     ;;
   training)
-    EMOJI="🏃‍♂️"
-    TEXT="トレーニングの時間です。週間メニューは下記をご確認ください。"
+    TEXT=$'トレーニング開始！\n今日を全力で追い込みましょう！'
     ;;
   work_end)
-    EMOJI="🏃‍♂️"
-    TEXT="仕事を20時までには終えて、ジムに向かいましょう。"
+    TEXT="仕事は20時まで！ジムに向かう！！"
     ;;
   voice_journal)
-    EMOJI="🎤"
-    TEXT="今すぐ音声ジャーナルを1、2分で作成しましょう。"
+    TEXT="今すぐ音声ジャーナル作成！"
     ;;
   bedtime)
-    EMOJI="🛌✨"
-    TEXT="早く寝るためにベッドに入りましょう。"
+    TEXT="ベッドに入ろう。夜更かし厳禁！"
     ;;
   *)
     echo "Usage: $0 <breakfast|lunch|snack|dinner|training|work_end|voice_journal|bedtime>" >&2
@@ -131,25 +133,24 @@ if [[ "$TYPE" == "training" ]]; then
   PAYLOAD=$(jq -n \
     --arg channel "$SLACK_CHANNEL" \
     --arg mention "$MENTION_ID" \
-    --arg emoji "$EMOJI" \
     --arg text "$TEXT" \
     --arg body "$MENU_BODY" \
 '{
   "channel": $channel,
-  "text": ($emoji + " <@" + $mention + "> " + $text + "\n\n" + $body),
+  "text": ("<@" + $mention + "> " + $text + "\n\n" + $body),
   "blocks": [
     {
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": ($emoji + " <@" + $mention + ">  " + $text)
+        "text": ("<@" + $mention + "> " + $text)
       }
     },
     {
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": ("*【週間練習メニュー】*\n\n" + $body)
+        "text": ("*【週間メニュー】*\n\n" + $body)
       }
     }
   ]
@@ -158,26 +159,24 @@ elif [[ "$TYPE" == "breakfast" || "$TYPE" == "lunch" || "$TYPE" == "snack" || "$
   PAYLOAD=$(jq -n \
     --arg channel "$SLACK_CHANNEL" \
     --arg mention "$MENTION_ID" \
-    --arg emoji "$EMOJI" \
     --arg text "$TEXT" \
     --arg body "$MEAL_BODY" \
-    --arg title "$MEAL_LABEL" \
 '{
   "channel": $channel,
-  "text": ($emoji + " <@" + $mention + "> " + $text + "\n\n" + $body),
+  "text": ("<@" + $mention + "> " + $text + "\n\n" + $body),
   "blocks": [
     {
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": ($emoji + " <@" + $mention + ">  " + $text)
+        "text": ("<@" + $mention + "> " + $text)
       }
     },
     {
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": ("*【" + $title + "のポイント（栄養）】*\n\n" + $body)
+        "text": $body
       }
     }
   ]
@@ -187,18 +186,24 @@ elif [[ "$TYPE" == "voice_journal" ]]; then
     PAYLOAD=$(jq -n \
       --arg channel "$SLACK_CHANNEL" \
       --arg mention "$MENTION_ID" \
-      --arg emoji "$EMOJI" \
       --arg text "$TEXT" \
       --arg vlink "$LIFE_VOICE_SLACK_LINK" \
 '{
   "channel": $channel,
-  "text": ($emoji + " <@" + $mention + "> " + $text),
+  "text": ("<@" + $mention + "> " + $text + "\n\n<" + $vlink + "|音声チャンネルへ>"),
   "blocks": [
     {
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": ($emoji + " <@" + $mention + ">  " + $text + "\n\n<" + $vlink + "|音声チャンネルへ>")
+        "text": ("<@" + $mention + "> " + $text)
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": ("<" + $vlink + "|音声チャンネルへ>")
       }
     }
   ]
@@ -207,17 +212,16 @@ elif [[ "$TYPE" == "voice_journal" ]]; then
     PAYLOAD=$(jq -n \
       --arg channel "$SLACK_CHANNEL" \
       --arg mention "$MENTION_ID" \
-      --arg emoji "$EMOJI" \
       --arg text "$TEXT" \
 '{
   "channel": $channel,
-  "text": ($emoji + " <@" + $mention + "> " + $text),
+  "text": ("<@" + $mention + "> " + $text),
   "blocks": [
     {
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": ($emoji + " <@" + $mention + ">  " + $text + "\n\n（音声チャンネル URL を p1-1.env の LIFE_VOICE_SLACK_LINK に設定してください）")
+        "text": ("<@" + $mention + "> " + $text)
       }
     }
   ]
@@ -227,17 +231,16 @@ else
   PAYLOAD=$(jq -n \
     --arg channel "$SLACK_CHANNEL" \
     --arg mention "$MENTION_ID" \
-    --arg emoji "$EMOJI" \
     --arg text "$TEXT" \
 '{
   "channel": $channel,
-  "text": ($emoji + " <@" + $mention + "> " + $text),
+  "text": ("<@" + $mention + "> " + $text),
   "blocks": [
     {
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": ($emoji + " <@" + $mention + ">  " + $text)
+        "text": ("<@" + $mention + "> " + $text)
       }
     }
   ]

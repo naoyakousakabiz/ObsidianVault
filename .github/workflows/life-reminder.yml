@@ -2,15 +2,18 @@ name: P1-3 リマインダー → #life-reminder
 
 on:
   schedule:
-    - cron: '0 21 * * *'    # 06:00 JST — トレーニング
-    - cron: '30 22 * * *'   # 07:30 JST — 朝食
-    - cron: '0 3 * * *'     # 12:00 JST — 昼食
+    - cron: '0 21 * * *'    # 06:00 JST — 朝食
+    - cron: '30 2 * * *'    # 11:30 JST — 昼食
     - cron: '30 6 * * *'    # 15:30 JST — 補食
-    - cron: '0 10 * * *'    # 19:00 JST — 夕食
+    - cron: '30 9 * * *'    # 18:30 JST — 夕食
+    - cron: '0 10 * * *'    # 19:00 JST — 仕事終了（20時までに切り上げ→ジム）
+    - cron: '0 11 * * *'    # 20:00 JST — トレーニング
+    - cron: '0 13 * * *'    # 22:00 JST — 音声ジャーナル
+    - cron: '30 13 * * *'   # 22:30 JST — 就寝
   workflow_dispatch:
     inputs:
       type:
-        description: 'reminder type (training/breakfast/lunch/snack/dinner)'
+        description: 'training|breakfast|lunch|snack|dinner|work_end|voice_journal|bedtime'
         required: true
         default: breakfast
 
@@ -18,6 +21,7 @@ on:
 #   SLACK_BOT_TOKEN                — xoxb- で始まる Bot トークン
 #   LIFE_REMINDER_SLACK_CHANNEL_ID — life-reminder チャンネル ID
 #   LIFE_OWNER_SLACK_ID            — メンション先の Slack ユーザー ID（省略時は sh 内デフォルト）
+#   LIFE_VOICE_SLACK_LINK          — 任意。音声ジャーナル用の Slack 音声チャンネル／ハドル URL
 
 jobs:
   reminder:
@@ -33,22 +37,26 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "TYPE=${{ github.event.inputs.type }}" >> "$GITHUB_OUTPUT"
           else
-            # cron から種別を判定（UTC時刻で判断）
-            HOUR=$(date -u +%H)
-            MIN=$(date -u +%M)
-            if   [ "$HOUR" = "21" ]; then echo "TYPE=training"  >> "$GITHUB_OUTPUT"
-            elif [ "$HOUR" = "22" ]; then echo "TYPE=breakfast" >> "$GITHUB_OUTPUT"
-            elif [ "$HOUR" = "03" ]; then echo "TYPE=lunch"     >> "$GITHUB_OUTPUT"
-            elif [ "$HOUR" = "06" ]; then echo "TYPE=snack"     >> "$GITHUB_OUTPUT"
-            elif [ "$HOUR" = "10" ]; then echo "TYPE=dinner"    >> "$GITHUB_OUTPUT"
+            # cron から種別を判定（UTC の時・分で一意に）
+            H=$(date -u +%H)
+            M=$(date -u +%M)
+            if   [ "$H" = "21" ] && [ "$M" = "00" ]; then echo "TYPE=breakfast"       >> "$GITHUB_OUTPUT"
+            elif [ "$H" = "02" ] && [ "$M" = "30" ]; then echo "TYPE=lunch"         >> "$GITHUB_OUTPUT"
+            elif [ "$H" = "06" ] && [ "$M" = "30" ]; then echo "TYPE=snack"         >> "$GITHUB_OUTPUT"
+            elif [ "$H" = "09" ] && [ "$M" = "30" ]; then echo "TYPE=dinner"        >> "$GITHUB_OUTPUT"
+            elif [ "$H" = "10" ] && [ "$M" = "00" ]; then echo "TYPE=work_end"      >> "$GITHUB_OUTPUT"
+            elif [ "$H" = "11" ] && [ "$M" = "00" ]; then echo "TYPE=training"      >> "$GITHUB_OUTPUT"
+            elif [ "$H" = "13" ] && [ "$M" = "00" ]; then echo "TYPE=voice_journal" >> "$GITHUB_OUTPUT"
+            elif [ "$H" = "13" ] && [ "$M" = "30" ]; then echo "TYPE=bedtime"       >> "$GITHUB_OUTPUT"
             else echo "TYPE=breakfast" >> "$GITHUB_OUTPUT"
             fi
           fi
 
       - name: Run life-reminder
         env:
-          SLACK_BOT_TOKEN:                   ${{ secrets.SLACK_BOT_TOKEN }}
-          LIFE_REMINDER_SLACK_CHANNEL_ID:    ${{ secrets.LIFE_REMINDER_SLACK_CHANNEL_ID }}
-          LIFE_OWNER_SLACK_ID:               ${{ secrets.LIFE_OWNER_SLACK_ID }}
+          SLACK_BOT_TOKEN:                ${{ secrets.SLACK_BOT_TOKEN }}
+          LIFE_REMINDER_SLACK_CHANNEL_ID: ${{ secrets.LIFE_REMINDER_SLACK_CHANNEL_ID }}
+          LIFE_OWNER_SLACK_ID:            ${{ secrets.LIFE_OWNER_SLACK_ID }}
+          LIFE_VOICE_SLACK_LINK:          ${{ secrets.LIFE_VOICE_SLACK_LINK }}
         run: |
           bash "05_Life/50_AI自動化/scripts/life-reminder.sh" "${{ steps.type.outputs.TYPE }}"

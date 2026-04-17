@@ -1,0 +1,49 @@
+# 東京 00:05 頃に、その日の 80_Journal/01_Daily/YYYY-MM-DD.md が無ければ骨子を push。
+# 既にファイルがある場合は何もしない（上書きしない）。
+# 繰り越しルールは Cursor / .cursor/rules/daily-note-voice.mdc 側。
+
+name: Daily note — create if missing (JST)
+
+on:
+  schedule:
+    # 00:05 JST = 前日 15:05 UTC
+    - cron: '5 15 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-note-create
+  cancel-in-progress: false
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Create daily stub if missing
+        run: bash "05_Life/50_AI自動化/scripts/daily-note-stub.sh"
+
+      - name: Commit and push
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          TODAY="$(TZ=Asia/Tokyo date +%Y-%m-%d)"
+          REL="80_Journal/01_Daily/${TODAY}.md"
+          if [[ ! -f "$REL" ]]; then
+            exit 0
+          fi
+          git add "$REL"
+          if git diff --cached --quiet; then
+            echo "nothing to commit"
+            exit 0
+          fi
+          git commit -m "chore(journal): add daily ${TODAY} (auto)"
+          git push
