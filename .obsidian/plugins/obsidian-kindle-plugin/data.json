@@ -146,7 +146,7 @@
     "飲みの席には這ってでも行け！ 人づき合いが苦手な人のための「コミュ力」の身につけ方",
     "育児モテ！ 妻に感謝される、デキる男のサポート術20 スマートブックス"
   ],
-  "lastSyncDate": "2026-04-07T15:46:27.393Z",
+  "lastSyncDate": "2026-04-21T03:07:02.588Z",
   "fileNameTemplate": "{{title}}",
   "fileTemplate": "---\ntitle: {{title}}\nauthor: {{author}}\ntype: book\n---\n\n# {{title}}\n\nAuthor: {{author}}\n\n---\n\n## Highlights\n\n{{highlights}}\n\n---\n\n## Notes\n"
 }
