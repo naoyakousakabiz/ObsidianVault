@@ -10,8 +10,8 @@ tags: [NotebookLM, Cursor, deprecated]
 > [!warning] Deprecated
 > このファイルは統合レポート旧版のため更新停止。
 > 現在の正本は以下を参照：
-> - `04_AI/01_ツール運用/01_ツール役割と運用.md`
-> - `04_AI/01_ツール運用/03_NotebookLM.md`
+> - `04_AI/01_運用/01_ツール役割と運用.md`
+> - `04_AI/01_運用/03_NotebookLM.md`
 > 参照用途のみ。新規更新は正本側で実施。
 
 # Cursor × NotebookLM × Obsidian 運用統合レポート

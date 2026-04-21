@@ -12,13 +12,13 @@
         <string>lunch</string>
     </array>
 
-    <!-- 毎日 12:00 -->
+    <!-- 毎日 11:30（先頭文は「12:00に昼飯！」） -->
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
-        <integer>12</integer>
+        <integer>11</integer>
         <key>Minute</key>
-        <integer>0</integer>
+        <integer>30</integer>
     </dict>
 
     <key>StandardOutPath</key>

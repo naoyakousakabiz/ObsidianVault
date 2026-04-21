@@ -12,11 +12,11 @@
         <string>training</string>
     </array>
 
-    <!-- 毎日 06:00（トレーニング時刻に合わせて調整） -->
+    <!-- 毎日 20:00 JST（トレーニング） -->
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
-        <integer>6</integer>
+        <integer>20</integer>
         <key>Minute</key>
         <integer>0</integer>
     </dict>

@@ -22,7 +22,7 @@ alwaysApply: true
 1. **YAML（先頭）** — Vault 正本に合わせる:
    - `date:` 今日
    - `type: log` / `domain: journal` / `status: active` / `source: human` / `tags: []`
-2. **本文** — `99_System/Templates/Daily.md` の**展開後**と同一（Templater タグは書かない）。**「今日やること」は次の5見出し・番号行数を厳守:**
+2. **本文** — `99_System/Templates/Daily.md` の**展開後**と同一（Templater タグは書かない）。末尾の **`## 作業詳細ログ（任意）`** および **`<!-- AUTO_SHELL_START -->` / `END`** マーカー付きの欄もテンプレに含まれる（Obsidian 上の補足ログ用）。**「今日やること」は次の5見出し・番号行数を厳守:**
    - `### 本業` → `1.` `2.` `3.`（空＝プレースホルダ可）
    - `### RINGBELL` → `1.` `2.` `3.` → 空行1行
    - `### 学習` → `1.` `2.` → 空行1行

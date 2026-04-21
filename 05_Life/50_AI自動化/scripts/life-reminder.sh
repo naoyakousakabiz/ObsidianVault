@@ -35,9 +35,9 @@ if [[ -z "$SLACK_TOKEN" ]]; then
   echo "$(date): missing SLACK_BOT_TOKEN or SLACK_TOKEN in $ENV_FILE" >&2
   exit 1
 fi
-# Bot: xoxb- / User OAuth: xoxp-（chat.postMessage に権限があれば可）
-if [[ ! "$SLACK_TOKEN" =~ ^xox[bp]- ]]; then
-  echo "$(date): Slack トークンは xoxb-（Bot）または xoxp-（User）で始まる必要があります" >&2
+# Bot トークン（xoxb-）のみ許可。xoxp- を使うと本人名投稿になるため禁止。
+if [[ ! "$SLACK_TOKEN" =~ ^xoxb- ]]; then
+  echo "$(date): SLACK_BOT_TOKEN は xoxb-（Bot token）で始まる値のみ使用できます" >&2
   exit 1
 fi
 
@@ -73,6 +73,7 @@ case "$TYPE" in
 esac
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+VAULT_ROOT_FROM_SCRIPT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
 # トレーニング時は週間メニュー全文（正本: 09_Athlete/10_トライアスロン/週間練習メニュー.md）
 MENU_BODY=""
@@ -85,9 +86,12 @@ if [[ "$TYPE" == "training" ]]; then
   if [[ -n "${LIFE_TRAINING_WEEKLY_MENU_FILE:-}" && -f "${LIFE_TRAINING_WEEKLY_MENU_FILE}" ]]; then
     MENU_FILE="$LIFE_TRAINING_WEEKLY_MENU_FILE"
   else
-    CANDIDATE="$SCRIPT_DIR/../../../09_Athlete/10_トライアスロン/週間練習メニュー.md"
-    if [[ -f "$CANDIDATE" ]]; then
-      MENU_FILE="$CANDIDATE"
+    CANDIDATE1="$VAULT_ROOT_FROM_SCRIPT/09_Athlete/10_トライアスロン/週間練習メニュー.md"
+    CANDIDATE2="${GITHUB_WORKSPACE:-}/09_Athlete/10_トライアスロン/週間練習メニュー.md"
+    if [[ -f "$CANDIDATE1" ]]; then
+      MENU_FILE="$CANDIDATE1"
+    elif [[ -n "${GITHUB_WORKSPACE:-}" && -f "$CANDIDATE2" ]]; then
+      MENU_FILE="$CANDIDATE2"
     elif [[ -f "${HOME}/.config/lifeos/training-weekly-menu.md" ]]; then
       MENU_FILE="${HOME}/.config/lifeos/training-weekly-menu.md"
     fi
@@ -105,9 +109,12 @@ elif [[ "$TYPE" == "breakfast" || "$TYPE" == "lunch" || "$TYPE" == "snack" || "$
   if [[ -n "${LIFE_MEAL_REMINDER_BODIES_FILE:-}" && -f "${LIFE_MEAL_REMINDER_BODIES_FILE}" ]]; then
     MEAL_FILE="${LIFE_MEAL_REMINDER_BODIES_FILE}"
   else
-    CANDIDATE="$SCRIPT_DIR/../../../09_Athlete/70_食事/食事リマインド本文.md"
-    if [[ -f "$CANDIDATE" ]]; then
-      MEAL_FILE="$CANDIDATE"
+    CANDIDATE1="$VAULT_ROOT_FROM_SCRIPT/09_Athlete/70_食事/食事リマインド本文.md"
+    CANDIDATE2="${GITHUB_WORKSPACE:-}/09_Athlete/70_食事/食事リマインド本文.md"
+    if [[ -f "$CANDIDATE1" ]]; then
+      MEAL_FILE="$CANDIDATE1"
+    elif [[ -n "${GITHUB_WORKSPACE:-}" && -f "$CANDIDATE2" ]]; then
+      MEAL_FILE="$CANDIDATE2"
     elif [[ -f "${HOME}/.config/lifeos/meal-reminder-bodies.md" ]]; then
       MEAL_FILE="${HOME}/.config/lifeos/meal-reminder-bodies.md"
     fi
@@ -247,12 +254,19 @@ else
 }')
 fi
 
-curl -s -X POST "https://slack.com/api/chat.postMessage" \
+SLACK_RESPONSE=$(curl -s -X POST "https://slack.com/api/chat.postMessage" \
   -H "Authorization: Bearer $SLACK_TOKEN" \
   -H "Content-Type: application/json; charset=utf-8" \
-  -d "$PAYLOAD" > /dev/null
+  -d "$PAYLOAD")
 
 # p1-1.env と同じ ~/.config/lifeos/ にログ（CI では親ディレクトリが無いことがある）
 LOG_FILE="${HOME}/.config/lifeos/life-reminder.log"
 mkdir -p "$(dirname "$LOG_FILE")"
-echo "$(date): reminder sent [$TYPE]" >> "$LOG_FILE"
+if echo "$SLACK_RESPONSE" | jq -e '.ok == true' >/dev/null 2>&1; then
+  echo "$(date): reminder sent [$TYPE]" >> "$LOG_FILE"
+else
+  ERROR_TEXT=$(echo "$SLACK_RESPONSE" | jq -r '.error // "unknown_error"' 2>/dev/null)
+  echo "$(date): reminder failed [$TYPE] error=${ERROR_TEXT}" >> "$LOG_FILE"
+  echo "$(date): Slack API error [$TYPE] ${SLACK_RESPONSE}" >&2
+  exit 1
+fi

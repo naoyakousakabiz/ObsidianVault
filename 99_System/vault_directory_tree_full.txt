@@ -262,23 +262,24 @@
 ├── .vscode/
 │   └── settings.json
 ├── 00_Inbox/
-│   └── .DS_Store
 ├── 01_Work/
 │   ├── 10_スキル/
-│   │   ├── 10_common/
+│   │   ├── 10_共通スキル/
 │   │   ├── 20_CS業務/
 │   │   │   └── 01_CSナレッジ.md
 │   │   ├── 30_営業/
 │   │   │   └── 01_Salesフレームワーク.md
 │   │   └── 01_スキルマップ.md
-│   ├── 20_プレイブック/
+│   ├── 20_業務手順/
 │   │   ├── 20_プロセス/
 │   │   ├── 30_テンプレート/
 │   │   └── 01_業務フロー.md
 │   ├── 30_プロジェクト/
-│   ├── 40_マネジメント/
-│   ├── 50_AI自動化/
+│   ├── 40_組織運営/
+│   ├── 50_業務自動化/
 │   ├── 80_メモ/
+│   ├── 00_索引.md
+│   ├── 00_運用ルール.md
 │   ├── CLAUDE.md
 │   └── README.md
 ├── 02_Business/
@@ -287,6 +288,7 @@
 │   │   │   ├── 10_業務整理/
 │   │   │   │   ├── 00_README.md
 │   │   │   │   ├── 10_業務改善とAI導入_コンサル納品フレーム_RINGBELL用.md
+│   │   │   │   ├── README.md
 │   │   │   │   ├── テンプレ_AI適用・人的判断の分界.md
 │   │   │   │   ├── テンプレ_スコープと関係者.md
 │   │   │   │   ├── テンプレ_ヒアリング項目一覧.md
@@ -295,10 +297,12 @@
 │   │   │   │   └── ヒアリングシート_1.0.md
 │   │   │   ├── 20_設計/
 │   │   │   │   ├── 00_README.md
+│   │   │   │   ├── README.md
 │   │   │   │   ├── Ringwell_CS_AI自動化設計.md
 │   │   │   │   └── テンプレ_To-Beとシステム境界.md
 │   │   │   ├── 30_実行計画/
 │   │   │   │   ├── 00_README.md
+│   │   │   │   ├── README.md
 │   │   │   │   ├── テンプレ_クライアント向け1枚サマリー.md
 │   │   │   │   ├── テンプレ_リスクと外部サービス.md
 │   │   │   │   ├── テンプレ_定着メモ.md
@@ -307,12 +311,15 @@
 │   │   │   │   ├── 00_README.md
 │   │   │   │   ├── 00_施策一覧.md
 │   │   │   │   ├── 01_GAS_面談カレンダー_マネージャー招待とSlack通知.md
+│   │   │   │   ├── README.md
 │   │   │   │   └── テンプレ_施策設計書.md
 │   │   │   ├── 50_資産化/
 │   │   │   │   ├── 00_README.md
+│   │   │   │   ├── README.md
 │   │   │   │   └── テンプレ_学びと事例.md
 │   │   │   ├── 99_アーカイブ/
-│   │   │   │   └── 00_README.md
+│   │   │   │   ├── 00_README.md
+│   │   │   │   └── README.md
 │   │   │   ├── 00_背景と設計意図.md
 │   │   │   ├── 01_AI導入ロードマップ.md
 │   │   │   ├── 02_フォルダ設計.md
@@ -327,6 +334,8 @@
 │   │   ├── 47_業務棚卸し_6カテゴリ.md
 │   │   └── CLAUDE.md
 │   ├── 00_strategy.md
+│   ├── 00_索引.md
+│   ├── 00_運用ルール.md
 │   ├── 10_業務改善とAI導入_コンサル納品フレーム.md
 │   ├── CLAUDE.md
 │   └── README.md
@@ -336,22 +345,26 @@
 │   │   ├── 00_README.md
 │   │   ├── 10_resume.md
 │   │   ├── 20_work_history.md
-│   │   └── 30_traits.md
+│   │   ├── 30_traits.md
+│   │   └── README.md
 │   ├── 20_マスタ/
 │   │   ├── 00_README.md
 │   │   ├── 10_resume.md
-│   │   └── 20_work_history.md
+│   │   ├── 20_work_history.md
+│   │   └── README.md
 │   ├── 30_キャリア戦略/
 │   │   ├── 30_synthesis/
 │   │   │   ├── 00_README.md
-│   │   │   └── 10_example_202604_synthesis_template.md
+│   │   │   ├── 10_example_202604_synthesis_template.md
+│   │   │   └── README.md
 │   │   ├── 00_index.md
 │   │   ├── 00_README.md
-│   │   ├── 10_strategy.md
-│   │   ├── 20_planning.md
 │   │   ├── 01.md
 │   │   ├── 02.md
 │   │   ├── 03.md
+│   │   ├── 10_strategy.md
+│   │   ├── 20_planning.md
+│   │   ├── README.md
 │   │   └── 統合.md
 │   ├── 40_転職活動/
 │   │   ├── 10_campaigns/
@@ -360,34 +373,80 @@
 │   │   │       │   └── _template/
 │   │   │       │       ├── 00_README.md
 │   │   │       │       ├── 10_company_info.md
-│   │   │       │       └── 10_qa.md
+│   │   │       │       ├── 10_qa.md
+│   │   │       │       └── README.md
 │   │   │       ├── 00_pipeline.md
 │   │   │       ├── 00_README.md
 │   │   │       ├── 10_applications.md
 │   │   │       ├── 20_interviews.md
-│   │   │       └── 30_prep_common.md
+│   │   │       ├── 30_prep_common.md
+│   │   │       └── README.md
 │   │   ├── 99_アーカイブ/
 │   │   ├── 00_index.md
-│   │   └── 00_README.md
+│   │   ├── 00_README.md
+│   │   └── README.md
 │   ├── 50_自動化/
 │   │   ├── scripts/
 │   │   │   ├── new_company.sh
 │   │   │   └── weekly_pipeline.sh
 │   │   ├── 00_README.md
-│   │   └── 10_手順.md
-│   ├── .DS_Store
+│   │   ├── 10_手順.md
+│   │   └── README.md
 │   ├── 00_README.md
-│   └── CLAUDE.md
+│   ├── 00_索引.md
+│   ├── 00_運用ルール.md
+│   ├── CLAUDE.md
+│   └── README.md
 ├── 04_AI/
-│   ├── 01_ツール運用/
+│   ├── 01_運用/
 │   │   ├── 00_索引.md
+│   │   ├── 00_運用ルール.md
 │   │   ├── 01_ツール役割と運用.md
 │   │   ├── 02_フェーズとガバナンス.md
 │   │   ├── 03_NotebookLM.md
 │   │   ├── 05_データ蓄積ガイド.md
 │   │   ├── 06_自動化バックログ.md
-│   │   └── 10_運用ルール.md
-│   ├── 02_AI導入コンサルテンプレートフォルダ/
+│   │   ├── 07_ObsidianRSS_LINE取り込み設計.md
+│   │   └── 08_Obsidian朝インプットohayo.md
+│   ├── 02_手法/
+│   │   ├── 10_AI全般/
+│   │   │   ├── 10_AI思考設計_オーケストレーション5要素.md
+│   │   │   ├── 11_AI品質管理_ファクトチェック実務手順.md
+│   │   │   └── 12_AI知識化_読書知識資産化フレーム.md
+│   │   ├── 20_ClaudeCode/
+│   │   │   ├── 20_ClaudeCode設計_スキル設計要点.md
+│   │   │   ├── 21_ClaudeCode実装_Remotion動画テロップ自動化.md
+│   │   │   └── 22_ClaudeCode運用_定期実行方式選定ガイド.md
+│   │   ├── 30_NotebookLM/
+│   │   │   └── 40_NotebookLM出力_ビジネス図解プロンプト.md
+│   │   ├── 40_連携設計/
+│   │   │   └── 30_接続方式_API_CLI_MCP選定ガイド.md
+│   │   ├── 00_運用ルール.md
+│   │   └── Untitled
+│   ├── 03_学習/
+│   │   ├── 10_リサーチ/
+│   │   │   ├── AIビジネス観点メモ.md
+│   │   │   ├── AIユースケース200選.md
+│   │   │   ├── AI活用マインドセット.md
+│   │   │   ├── AI活用事例まとめ.md
+│   │   │   ├── ClaudeCodeMCPサーバー用途別メモ.md
+│   │   │   ├── ClaudeCodeスキル28種カタログ.md
+│   │   │   ├── ClaudeCodeスキル28種プロンプト集.md
+│   │   │   └── ClaudeCodeチャエン_スキルMCP運用.md
+│   │   ├── 20_講座・セミナー資料/
+│   │   │   ├── NotebookLM_20260322_20260326/
+│   │   │   │   ├── NotebookLMスライド作成_専門セミナー要約.md
+│   │   │   │   ├── NotebookLMスライド生成ガイド.md
+│   │   │   │   └── NotebookLMビジネス活用_概要セミナー要約.md
+│   │   │   └── チャエン_20260329/
+│   │   │       ├── ClaudeCode30日ロードマップ.md
+│   │   │       ├── ClaudeCodeバイブコーディング講座ノート.md
+│   │   │       ├── ClaudeCode業務活用QA132問.md
+│   │   │       └── ClaudeCode業務活用マスター講座.md
+│   │   ├── 00_運用ルール.md
+│   │   ├── 01_実行計画.md
+│   │   └── 02_基礎設定.md
+│   ├── 04_テンプレート/
 │   │   ├── 10_業務整理/
 │   │   │   ├── 00_README.md
 │   │   │   ├── テンプレ_AI適用・人的判断の分界.md
@@ -418,38 +477,7 @@
 │   │   ├── 01_AI導入ロードマップ.md
 │   │   ├── 02_フォルダ設計.md
 │   │   └── 03_Executiveセルフチェックリスト.md
-│   ├── 03_手法/
-│   │   ├── AI_オーケストレーション解説.md
-│   │   ├── AI_ファクトチェック実践.md
-│   │   ├── AI_読書の知識資産化.md
-│   │   ├── ClaudeCode_スキル設計の要点.md
-│   │   ├── ClaudeCode_動画テロップ自動Remotion.md
-│   │   ├── ClaudeCode_定期実行の選び方.md
-│   │   ├── MCP_APIとCLIの整理.md
-│   │   ├── NotebookLM_スライド作成セミナー要約.md
-│   │   ├── NotebookLM_スライド生成ガイド.md
-│   │   ├── NotebookLM_ビジネス図解プロンプト.md
-│   │   └── NotebookLM_概要セミナー要約.md
-│   ├── 04_学習/
-│   │   ├── AI_ビジネス観点メモ.md
-│   │   ├── AI_ユースケース200選.md
-│   │   ├── AI_活用マインドセット.md
-│   │   ├── AI_活用事例まとめ.md
-│   │   ├── ClaudeCode_30日ロードマップ.md
-│   │   ├── ClaudeCode_MCPサーバー用途別メモ.md
-│   │   ├── ClaudeCode_スキル28種カタログ.md
-│   │   ├── ClaudeCode_スキル28種プロンプト集.md
-│   │   ├── ClaudeCode_チャエンまとめ_スキルMCP運用.md
-│   │   ├── ClaudeCode_バイブコーディング講座ノート.md
-│   │   ├── ClaudeCode_初期設定手順まとめ.md
-│   │   ├── ClaudeCode_業務活用講座_QA132問.md
-│   │   ├── ClaudeCode_業務活用講座_完全レジュメ.md
-│   │   ├── Obsidian_RSSとLINE取り込み設計.md
-│   │   ├── Obsidian_朝インプットohayo.md
-│   │   └── 今後やること.md
-│   ├── 80_実験ログ/
-│   │   └── 20260408_宿題リスト.md
-│   ├── 90_SNSノウハウ/
+│   ├── 05_SNSノウハウ/
 │   │   └── note_有料記事タイトル設計メモ.md
 │   ├── 99_アーカイブ/
 │   │   ├── 09_人生設計ロードマップ.md
@@ -460,6 +488,7 @@
 │   │   ├── NotebookLM活用.md
 │   │   └── 業務.md
 │   ├── .DS_Store
+│   ├── 00_命名規則.md
 │   ├── CLAUDE.md
 │   └── README.md
 ├── 05_Life/
@@ -499,13 +528,19 @@
 │   ├── 80_documents/
 │   ├── 99_archive/
 │   │   └── 20260405_プロポーズ.md
+│   ├── 00_索引.md
+│   ├── 00_運用ルール.md
 │   ├── 15_個人自動化候補一覧.md
 │   ├── CLAUDE.md
 │   └── README.md
 ├── 06_Child/
+│   ├── 00_索引.md
+│   ├── 00_運用ルール.md
 │   ├── CLAUDE.md
 │   └── README.md
 ├── 07_Asset/
+│   ├── 00_索引.md
+│   ├── 00_運用ルール.md
 │   ├── 02_購入検討リスト.md
 │   └── CLAUDE.md
 ├── 08_Relationship/
@@ -524,6 +559,8 @@
 │   │   └── 01_友人リスト.md
 │   ├── 50_patterns/
 │   │   └── 01_コミュニケーションパターン.md
+│   ├── 00_索引.md
+│   ├── 00_運用ルール.md
 │   ├── CLAUDE.md
 │   └── README.md
 ├── 09_Athlete/
@@ -535,14 +572,19 @@
 │   │   └── 01_昼寝プロトコル.md
 │   ├── 60_睡眠/
 │   ├── 70_食事/
-│   ├── .DS_Store
+│   ├── 00_索引.md
+│   ├── 00_運用ルール.md
 │   └── CLAUDE.md
 ├── 10_Culture/
+│   ├── 00_索引.md
+│   ├── 00_運用ルール.md
 │   └── CLAUDE.md
 ├── 11_Beauty/
+│   ├── 00_索引.md
+│   ├── 00_運用ルール.md
 │   ├── 01_美容治療計画.md
-│   ├── CLAUDE.md
-│   └── 歯.md
+│   ├── 02_歯科ケア.md
+│   └── CLAUDE.md
 ├── 20_Input/
 │   ├── 01_Kindle/
 │   │   ├── _processed_log.md
@@ -558,14 +600,20 @@
 │   ├── 03_RSS/
 │   │   ├── _購読リスト.md
 │   │   └── CLAUDE.md
-│   └── 04_LINE/
-│       └── CLAUDE.md
+│   ├── 04_LINE/
+│   │   └── CLAUDE.md
+│   ├── 00_索引.md
+│   ├── 00_運用ルール.md
+│   ├── CLAUDE.md
+│   └── README.md
 ├── 80_Journal/
 │   ├── 01_Daily/
 │   │   ├── 2026-04-08.md
 │   │   └── 2026-04-09.md
 │   ├── 02_Voice/
 │   │   └── 2026-04-08.m4a
+│   ├── 00_索引.md
+│   ├── 00_運用ルール.md
 │   └── CLAUDE.md
 ├── 98_NotebookLM_Sync/
 │   ├── 04_Asset/
@@ -611,8 +659,10 @@
 │   │   ├── Daily.md
 │   │   ├── meeting_template.md
 │   │   └── reading_template.md
-│   ├── .DS_Store
+│   ├── 00_非AIフォルダ運用ルール.md
 │   ├── 01_NotebookLM_GAS_同期スクリプト.md
+│   ├── 01_ドキュメント責務ルール.md
+│   ├── 02_非AIフォルダ構造監査_2026-04-16.md
 │   ├── NotebookLM_Sync_Code.gs
 │   ├── vault_directory_tree_full.txt
 │   ├── Vault_Structure_Guide.md

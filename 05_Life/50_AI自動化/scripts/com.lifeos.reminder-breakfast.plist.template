@@ -12,13 +12,13 @@
         <string>breakfast</string>
     </array>
 
-    <!-- 毎日 07:30 -->
+    <!-- 毎日 06:00 -->
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
-        <integer>7</integer>
+        <integer>6</integer>
         <key>Minute</key>
-        <integer>30</integer>
+        <integer>0</integer>
     </dict>
 
     <key>StandardOutPath</key>

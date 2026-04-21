@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.lifeos.reminder-voice_journal</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/kousakanaoya/scripts/life-reminder.sh</string>
+        <string>voice_journal</string>
+    </array>
+
+    <!-- 毎日 22:00 JST -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>22</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/kousakanaoya/Library/Logs/com.lifeos.reminder-voice_journal.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/kousakanaoya/Library/Logs/com.lifeos.reminder-voice_journal.err.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>/Users/kousakanaoya</string>
+        <key>LANG</key>
+        <string>ja_JP.UTF-8</string>
+    </dict>
+</dict>
+</plist>

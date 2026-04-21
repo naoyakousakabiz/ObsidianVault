@@ -1,10 +1,10 @@
 #!/bin/bash
 # =============================================================
 # LifeOS ローカル自動化インストールスクリプト
-# 対象: P1-1（情報収集）/ life-reminder（食事・トレ）/ life-summary（夜サマリ）
+# 対象: P1-1（情報収集）/ life-reminder（食事・トレ）
 # 実行方法（ターミナルで）:
 #   bash ~/Library/CloudStorage/.../ObsibianVault/05_Life/50_AI自動化/scripts/install.sh [target]
-#   target: all（省略時）| p1-1 | reminder | summary
+#   target: all（省略時）| p1-1 | reminder | eod-push
 # =============================================================
 
 set -euo pipefail
@@ -55,14 +55,23 @@ install_p1_1() {
 install_reminder() {
   echo "──────────────────────────────────────────"
   echo " life-reminder インストール"
-  echo " 時刻: 朝食07:30 / 昼12:00 / 補食15:30 / 夕食19:00 / トレ06:00"
+  echo " 時刻: 朝食06:00 / 昼11:30 / 補食15:30 / 夕食18:30 / 仕事終19:00 / トレ20:00 / 音声22:00 / 就寝22:30"
   echo "──────────────────────────────────────────"
 
   cp "$SCRIPTS_SRC/life-reminder.sh" "$SCRIPTS_DEST/life-reminder.sh"
   chmod +x "$SCRIPTS_DEST/life-reminder.sh"
   echo "✓ スクリプト設置"
 
-  for TYPE in breakfast lunch snack dinner training; do
+  if [[ -f "$VAULT/09_Athlete/10_トライアスロン/週間練習メニュー.md" ]]; then
+    cp "$VAULT/09_Athlete/10_トライアスロン/週間練習メニュー.md" "$CONFIG_DIR/training-weekly-menu.md"
+    echo "✓ 週間練習メニュー → $CONFIG_DIR/training-weekly-menu.md（トレリマインダー用）"
+  fi
+  if [[ -f "$VAULT/09_Athlete/70_食事/食事リマインド本文.md" ]]; then
+    cp "$VAULT/09_Athlete/70_食事/食事リマインド本文.md" "$CONFIG_DIR/meal-reminder-bodies.md"
+    echo "✓ 食事リマインド本文 → $CONFIG_DIR/meal-reminder-bodies.md"
+  fi
+
+  for TYPE in breakfast lunch snack dinner training work_end voice_journal bedtime; do
     local LABEL="com.lifeos.reminder-$TYPE"
     local PLIST_DEST="$PLIST_DIR/$LABEL.plist"
     cp "$SCRIPTS_SRC/com.lifeos.reminder-${TYPE}.plist.template" "$PLIST_DEST"
@@ -71,41 +80,85 @@ install_reminder() {
     echo "✓ $LABEL 登録完了"
   done
 
-  echo "✅ life-reminder 5件 登録完了"
+  echo "✅ life-reminder 8件 登録完了"
   echo "   トレーニング時刻を変更する場合:"
   echo "   $PLIST_DIR/com.lifeos.reminder-training.plist を編集 → launchctl reload"
 }
 
-# ── life-summary（夜サマリ 21:00）─────────────────────────
-install_summary() {
-  local LABEL="com.lifeos.life-summary"
+# ── デイリー自動 push（20:50 JST・GitHub バックアップ用・任意）────────
+install_eod_push() {
+  local LABEL="com.lifeos.eod-push"
 
   echo "──────────────────────────────────────────"
-  echo " life-summary インストール（21:00）"
+  echo " eod-push（デイリー自動 git push）"
+  echo " 毎日 20:50 JST — 任意（Vault の GitHub バックアップ用）"
   echo "──────────────────────────────────────────"
 
-  cp "$SCRIPTS_SRC/life-summary.sh" "$SCRIPTS_DEST/life-summary.sh"
-  chmod +x "$SCRIPTS_DEST/life-summary.sh"
-  echo "✓ スクリプト設置"
+  cp "$SCRIPTS_SRC/eod-push.sh" "$SCRIPTS_DEST/eod-push.sh"
+  chmod +x "$SCRIPTS_DEST/eod-push.sh"
+  echo "✓ スクリプト設置: $SCRIPTS_DEST/eod-push.sh"
+
+  mkdir -p "$HOME/Library/Logs"
 
   local PLIST_DEST="$PLIST_DIR/$LABEL.plist"
-  cp "$SCRIPTS_SRC/com.lifeos.life-summary.plist.template" "$PLIST_DEST"
+  cat > "$PLIST_DEST" << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>${LABEL}</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>${SCRIPTS_DEST}/eod-push.sh</string>
+    </array>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>20</integer>
+        <key>Minute</key>
+        <integer>50</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>${HOME}/Library/Logs/${LABEL}.log</string>
+    <key>StandardErrorPath</key>
+    <string>${HOME}/Library/Logs/${LABEL}.err.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin</string>
+        <key>LANG</key>
+        <string>ja_JP.UTF-8</string>
+        <key>LIFEOS_VAULT</key>
+        <string>${VAULT}</string>
+    </dict>
+</dict>
+</plist>
+EOF
+
   launchctl unload "$PLIST_DEST" 2>/dev/null || true
   launchctl load -w "$PLIST_DEST"
-  echo "✅ life-summary 登録完了（次回実行: 本日 or 翌 21:00）"
+  echo "✅ ${LABEL} 登録完了（次回: 本日 or 翌 20:50 JST）"
+  echo "   解除: launchctl unload -w $PLIST_DEST"
 }
 
 # ── 実行 ─────────────────────────────────────────────────
 case "$TARGET" in
   p1-1)     install_p1_1 ;;
   reminder) install_reminder ;;
-  summary)  install_summary ;;
+  eod-push) install_eod_push ;;
   all)
     install_p1_1
     echo ""
     install_reminder
-    echo ""
-    install_summary
     echo ""
     echo "══════════════════════════════════════════"
     echo "✅ 全ジョブ インストール完了"
@@ -113,13 +166,15 @@ case "$TARGET" in
     echo ""
     echo "テスト配信:"
     echo "  bash $SCRIPTS_DEST/life-reminder.sh breakfast"
-    echo "  bash $SCRIPTS_DEST/life-summary.sh"
     echo ""
     echo "登録確認:"
     echo "  launchctl list | grep com.lifeos"
+    echo ""
+    echo "デイリーを GitHub に自動 push（任意）だけ入れる場合:"
+    echo "  bash $0 eod-push"
     ;;
   *)
-    echo "Usage: $0 [all|p1-1|reminder|summary]"
+    echo "Usage: $0 [all|p1-1|reminder|eod-push]"
     exit 1
     ;;
 esac

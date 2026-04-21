@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Copy AI consulting templates from generic folder to RINGBELL 50_AI自動化 with path/YAML fixes."""
+"""Copy AI consulting templates from generic folder to RINGBELL 50_業務自動化 with path/YAML fixes."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ from pathlib import Path
 
 VAULT = Path(__file__).resolve().parents[2]
 GENERIC = VAULT / "04_AI" / "02_AI導入コンサルテンプレートフォルダ"
-RINGBELL = VAULT / "02_Business" / "RINGBELL" / "50_AI自動化"
+RINGBELL = VAULT / "02_Business" / "RINGBELL" / "50_業務自動化"
 
 PREFIX = "04_AI/02_AI導入コンサルテンプレートフォルダ"
 ROADMAP = "01_AI導入ロードマップ.md"
@@ -125,11 +125,11 @@ def _write_background_ringbell() -> None:
     )
     text = text.replace(
         "# AI導入コンサルテンプレートフォルダ — 背景・意図・前提",
-        "# RINGBELL `50_AI自動化/` — 背景・意図・前提（作業コピー）",
+        "# RINGBELL `50_業務自動化/` — 背景・意図・前提（作業コピー）",
     )
     text = text.replace(
-        "**作業コピーの例:** `02_Business/RINGBELL/50_AI自動化/` — 棚構造は揃えつつ、**型の正本は本フォルダ**、RINGBELL 固有の長文・施策実体は案件側。",
-        "**本作業棚:** いま開いている `50_AI自動化/`。**このフォルダ直下の索引・テンプレ一覧の入口**は `02_フォルダ設計.md`。**型の正本（汎用）**は `04_AI/02_AI導入コンサルテンプレートフォルダ/`。",
+        "**作業コピーの例:** `02_Business/01_RINGBELL/50_業務自動化/` — 棚構造は揃えつつ、**型の正本は本フォルダ**、RINGBELL 固有の長文・施策実体は案件側。",
+        "**本作業棚:** いま開いている `50_業務自動化/`。**このフォルダ直下の索引・テンプレ一覧の入口**は `02_フォルダ設計.md`。**型の正本（汎用）**は `04_AI/02_AI導入コンサルテンプレートフォルダ/`。",
     )
     text = text.replace(
         "**「何を・なぜこの形で残すか」のメタ説明**である。手順の実行自体は `01_AI導入ロードマップ.md`、ファイル名の一覧と単一正本ルールは `02_フォルダ設計.md`、納品直前の網羅確認は `03_Executiveセルフチェックリスト.md` を正とする。",

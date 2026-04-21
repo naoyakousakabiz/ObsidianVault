@@ -12,13 +12,13 @@
         <string>dinner</string>
     </array>
 
-    <!-- 毎日 19:00 -->
+    <!-- 毎日 18:30（19:00 は仕事終了リマインド） -->
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
-        <integer>19</integer>
+        <integer>18</integer>
         <key>Minute</key>
-        <integer>0</integer>
+        <integer>30</integer>
     </dict>
 
     <key>StandardOutPath</key>
