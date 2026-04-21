@@ -37,6 +37,8 @@ jobs:
           SLACK_BOT_TOKEN:    ${{ secrets.SLACK_BOT_TOKEN }}
           P11_SLACK_CHANNEL_ID: ${{ secrets.P11_SLACK_CHANNEL_ID }}
           TWITTERAPI_IO_KEY:  ${{ secrets.TWITTERAPI_IO_KEY }}
+          # X 収集の本番スイッチ（false の間はスクリプト内の X_COLLECTION_ENABLED を true にしても API は呼ばない）
+          P11_X_COLLECTION_ENABLED: "false"
           P11_X_USAGE_FILE:   /tmp/p11-cache/x_usage_monthly.json
           X_API_PRICE_PER_CALL: "0.00015"
           X_COST_ALERT_THRESHOLD_USD: "1.0"

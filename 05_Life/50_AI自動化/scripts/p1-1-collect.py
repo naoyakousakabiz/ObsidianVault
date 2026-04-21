@@ -32,6 +32,9 @@ YOUTUBE_CHANNELS = [
     ("あなたのAI顧問", "UCs4JETeUDLunGHzGU0mB1Vg"),
     ("PIVOT 公式チャンネル", "UC8yHePe_RgUBE-waRWy6olw"),
 ]
+# X 収集のオンオフ（デフォルト。本番は GitHub Actions の env P11_X_COLLECTION_ENABLED が優先）
+# 優先順位: 環境変数 P11_X_COLLECTION_ENABLED > この定数
+X_COLLECTION_ENABLED = False
 # X 収集対象アカウント（RT除外・本人投稿のみ）
 X_ACCOUNTS = [
     # AI活用
@@ -340,13 +343,14 @@ def load_previous_urls(path: Path) -> set[str]:
 
 
 def fetch_x_entries(
+    x_enabled: bool,
     api_key: str,
     now_jst: datetime,
     prev_urls: set[str],
     errors: list[str],
     require_keywords: bool = True,
 ) -> list[Entry]:
-    if not X_ACCOUNTS:
+    if not x_enabled or not X_ACCOUNTS:
         return []
     from_query = " OR ".join(f"from:{a}" for a in X_ACCOUNTS)
     query = f"({from_query}) -is:retweet -is:reply"
@@ -697,6 +701,8 @@ def main() -> int:
     x_entries: list[Entry] = []
     errors: list[str] = []
 
+    x_enabled = env_bool("P11_X_COLLECTION_ENABLED", X_COLLECTION_ENABLED)
+
     rss_feeds = select_rss_feeds(os.environ.get("P11_RSS_INCLUDE", ""))
 
     for source, url in rss_feeds:
@@ -736,7 +742,7 @@ def main() -> int:
 
     twitterapi_key = os.environ.get("TWITTERAPI_IO_KEY")
     x_usage_summary = ""
-    if twitterapi_key:
+    if twitterapi_key and x_enabled and X_ACCOUNTS:
         x_min_likes = env_int("X_MIN_LIKES", 10)
         x_require_keywords = env_bool("X_REQUIRE_PRIORITY_KEYWORDS", False)
         x_api_price_per_call = env_float("X_API_PRICE_PER_CALL", 0.00015)
@@ -748,6 +754,7 @@ def main() -> int:
         X_MIN_LIKES = x_min_likes
 
         x_entries = fetch_x_entries(
+            x_enabled,
             twitterapi_key,
             now_jst,
             prev_urls,
@@ -772,6 +779,14 @@ def main() -> int:
         print(
             f"[INFO] X抽出条件: min_likes={x_min_likes}, require_keywords={x_require_keywords}, accounts={len(X_ACCOUNTS)}"
         )
+    elif twitterapi_key:
+        if not x_enabled:
+            print(
+                "[INFO] X収集スキップ: 収集オフ "
+                "（P11_X_COLLECTION_ENABLED または X_COLLECTION_ENABLED）"
+            )
+        else:
+            print("[INFO] X収集スキップ: X_ACCOUNTS が空")
     else:
         print("[INFO] X収集スキップ: TWITTERAPI_IO_KEY 未設定")
 
