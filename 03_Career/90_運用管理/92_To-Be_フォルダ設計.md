@@ -54,7 +54,7 @@ tags: [folder-design, architecture]
 │       └── 10_example_202604_synthesis_template.md
 │
 │   ※ 01.md / 02.md / 03.md は統合.mdに合流済み
-│     → ★ archive/ フォルダへ移動を推奨（合意後）
+│     → ★ `99_アーカイブ/30_キャリア戦略_旧版/` へ移動（対応済み）
 │
 ├── 40_転職活動/
 │   ├── 00_index.md
@@ -98,7 +98,7 @@ tags: [folder-design, architecture]
 | 日付イベント | `YYYYMMDD_名前.md` | `20260502_入籍.md` |
 | テンプレ | `_template` サフィックス | `_template/` |
 | Claude Code 指示・成果物群 | `90_` 台（90〜99）で共用 | `90_ClaudeCode指示_…md`・`91_監査レポート_…md` 等 |
-| アーカイブ | `archive/` または `99_archive/` | — |
+| アーカイブ | `99_アーカイブ/` | — |
 
 ---
 
@@ -111,7 +111,7 @@ tags: [folder-design, architecture]
 | 強み・価値観・人物像 | `10_プロフィール/30_traits.md` | 参照リンクのみ |
 | 意思決定の型・評価軸 | `30_キャリア戦略/10_strategy.md` | 参照リンクのみ |
 | 3年計画・KGI | `30_キャリア戦略/20_planning.md` | 参照リンクのみ |
-| AI市況・市場分析 | `30_キャリア戦略/統合.md` | 参照リンクのみ |
+| AI市況・市場分析 | `30_キャリア戦略/40_AI市況×キャリア戦略_統合正本.md` | 参照リンクのみ |
 | 汎用提出書類 | `20_マスタ/` | `40_転職活動/companies/` に企業別派生版 |
 | 応募ログ・選考記録 | `40_転職活動/10_campaigns/…/` | 要約は `20_planning.md` へ反映 |
 
@@ -129,5 +129,5 @@ tags: [folder-design, architecture]
 | 変更内容 | 影響 | 確認事項 |
 |:--|:--|:--|
 | `00_README.md` を1行に縮小 | legacy参照が壊れる可能性 | 他ツール（Cursor等）でリンクしているか確認 |
-| `01.md`/`02.md`/`03.md` → archive へ | 直接リンクが壊れる | NotebookLM ソースに含まれていないか確認 |
+| `01.md`/`02.md`/`03.md` → archive へ | 直接リンクが壊れる | NotebookLM ソースに含まれていないか確認（対応済み） |
 | `90_ClaudeCode指示_…md` → archive へ | — | 依頼完了後に移動 |
